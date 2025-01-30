@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import glsl from 'vite-plugin-glsl'
 import path from 'path'
@@ -19,7 +20,7 @@ function removeTestAssets() {
 }
 
 export default defineConfig({
-    plugins: [removeTestAssets(), react(), glsl()],
+    plugins: [removeTestAssets(), react(), glsl(), tailwindcss()],
 //    root: 'src/',
 //    publicDir: '../public',
 //    base: './',
