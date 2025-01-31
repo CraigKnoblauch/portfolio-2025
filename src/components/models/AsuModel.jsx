@@ -5,24 +5,46 @@ Command: npx gltfjsx@6.2.16 asu.glb
 
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
-import * as THREE from 'three'
 
 export function AsuModel(props) {
   const { nodes, materials } = useGLTF('./models/asu.glb')
-
   return (
     <group {...props} dispose={null}>
-      <group rotation={[0, -1.358, 0]}>
-        <mesh geometry={nodes.Cube030.geometry} material={materials['dark-brown']} />
-        <mesh geometry={nodes.Cube030_1.geometry} material={materials['platform-gray']} />
-        <mesh geometry={nodes.Cube030_2.geometry} material={materials['asu-soil']} />
-        <mesh geometry={nodes.Cube030_3.geometry} material={materials['asu-lite-rock']} />
-        <mesh geometry={nodes.Cube030_4.geometry} material={materials['leaf-green']} />
-        <mesh geometry={nodes.Cube030_5.geometry} material={materials['asu-red']} />
-        <mesh geometry={nodes.Cube030_6.geometry} material={materials.gold} />
-        <mesh geometry={nodes.Cube030_7.geometry} material={materials['grad-cap']} />
-        <mesh geometry={nodes.Cube030_8.geometry} material={materials['cactus-flower-pink']} />
-      </group>
+      <mesh geometry={nodes.asu_platform.geometry} material={materials['platform-gray']} position={[0.457, 0.355, -0.589]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_soil.geometry} material={materials['asu-soil']} position={[0.457, 0.841, -0.589]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_dark_tall_rock.geometry} material={materials['dark-brown']} position={[-0.858, 1.319, -1.691]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_lite_tall_rock.geometry} material={materials['asu-lite-rock']} position={[1.44, 1.266, -1.716]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_dark_rock001.geometry} material={materials['dark-brown']} position={[-1.123, 0.883, 0.716]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_dark_rock002.geometry} material={materials['dark-brown']} position={[-0.649, 0.876, -0.191]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_lite_rock001.geometry} material={materials['asu-lite-rock']} position={[0.054, 0.875, 0.066]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_lite_rock002.geometry} material={materials['asu-lite-rock']} position={[0.633, 0.875, -0.401]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_lite_rock003.geometry} material={materials['asu-lite-rock']} position={[0.52, 0.875, 0.614]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_lite_rock004.geometry} material={materials['asu-lite-rock']} position={[1.023, 0.876, 0.097]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_dark_rock003.geometry} material={materials['dark-brown']} position={[-0.527, 0.883, 0.64]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_dark_rock004.geometry} material={materials['dark-brown']} position={[-0.086, 0.883, -0.45]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_dark_rock005.geometry} material={materials['dark-brown']} position={[1.074, 0.883, -0.43]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_dark_rock006.geometry} material={materials['dark-brown']} position={[0.617, 0.884, 0.107]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_dark_rock007.geometry} material={materials['dark-brown']} position={[1.242, 0.883, 0.648]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_dark_rock008.geometry} material={materials['dark-brown']} position={[0.012, 0.883, 0.564]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_lite_rock005.geometry} material={materials['asu-lite-rock']} position={[-1.01, 0.875, 0.316]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_dark_rock009.geometry} material={materials['dark-brown']} position={[-1.151, 0.875, -0.062]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_dark_rock.geometry} material={materials['dark-brown']} position={[1.568, 0.883, -0.026]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_lite_rock.geometry} material={materials['asu-lite-rock']} position={[-0.662, 0.875, -0.631]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_cactus002.geometry} material={materials['leaf-green']} position={[1.98, 1.513, -0.624]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_cactus001.geometry} material={materials['leaf-green']} position={[1.572, 1.287, -0.363]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_cactus.geometry} material={materials['leaf-green']} position={[-1.042, 1.357, -0.622]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_ground_cactus.geometry} material={materials['leaf-green']} position={[-0.392, 0.912, 0.304]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_ground_cactus001.geometry} material={materials['leaf-green']} position={[0.294, 0.891, -0.194]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_ground_cactus002.geometry} material={materials['leaf-green']} position={[0.852, 0.896, 0.491]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_logo_body.geometry} material={materials['asu-red']} position={[0.435, 1.443, -1.151]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_logo_sun.geometry} material={materials.gold} position={[0.406, 1.471, -1.161]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.grad_cap_base.geometry} material={materials['grad-cap']} position={[1.995, 1.026, 0.651]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.grad_cap_top.geometry} material={materials['grad-cap']} position={[1.988, 1.181, 0.65]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.grad_cap_button.geometry} material={materials['grad-cap']} position={[1.987, 1.192, 0.649]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.grad_cap_cord.geometry} material={materials.gold} position={[1.829, 1.196, 1.059]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.grad_cap_tassel.geometry} material={materials.gold} position={[1.787, 0.908, 1.17]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_cactus_flower001.geometry} material={materials['cactus-flower-pink']} position={[-0.957, 1.614, -0.665]} rotation={[0, -1.344, 0]} />
+      <mesh geometry={nodes.asu_cactus_flower.geometry} material={materials['cactus-flower-pink']} position={[1.902, 1.896, -0.669]} rotation={[0, -1.344, 0]} />
     </group>
   )
 }
