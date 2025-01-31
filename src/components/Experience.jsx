@@ -9,21 +9,24 @@ import { GithubModel } from "src/components/models/GithubModel"
 import { LinkedinModel } from "src/components/models/LinkedinModel"
 import { MailboxModel } from "src/components/models/MailboxModel"
 import { RabbitHoleModel } from "src/components/models/RabbitHoleModel"
+import MatcapManager from "src/MatcapManager"
 
 export const Experience = () => {
+
+    const matcapManager = new MatcapManager();
 
     return <>
         <OrbitControls />
         <ambientLight intensity={2} />
-        {/* <VanguardModel /> */}
-        <AsuModel />
-        {/* <RocketLaunchModel /> */}
-        {/* <NrlModel /> */}
-        {/* <PhoenixLogoModel /> */}
-        {/* <CubesatModel /> */}
-        {/* <GithubModel /> */}
-        {/* <LinkedinModel /> */}
-        {/* <MailboxModel /> */}
-        {/* <RabbitHoleModel /> */}
+        <VanguardModel matcapManager={matcapManager} />
+        <AsuModel matcapManager={matcapManager} />
+        <RocketLaunchModel matcapManager={matcapManager} />
+        <NrlModel matcapManager={matcapManager} />
+        <PhoenixLogoModel matcapManager={matcapManager} />
+        <CubesatModel matcapManager={matcapManager} />
+        <GithubModel matcapManager={matcapManager} />
+        <LinkedinModel matcapManager={matcapManager} />
+        <MailboxModel matcapManager={matcapManager} />
+        <RabbitHoleModel matcapManager={matcapManager} />
     </>
 }

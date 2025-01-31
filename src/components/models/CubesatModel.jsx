@@ -8,14 +8,27 @@ import { useGLTF } from '@react-three/drei'
 
 export function CubesatModel(props) {
   const { nodes, materials } = useGLTF('./models/cubesat.glb')
+  const matcapManager = props.matcapManager;
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.antenna.geometry} material={materials.paper} position={[-0.463, 2.368, 0.368]} rotation={[0, -0.45, 0]} />
-      <mesh geometry={nodes.antenna_board.geometry} material={materials['dark-brown']} position={[-0.467, 2.354, 0.356]} rotation={[0, -0.45, 0]} />
-      <mesh geometry={nodes.cubesat_solar_panels.geometry} material={materials.black} position={[0.24, 2.066, -0.032]} rotation={[0, -0.45, 0]} />
-      <mesh geometry={nodes.cubesat_lens.geometry} material={materials.black} position={[-0.783, 1.821, 0.324]} rotation={[0, -0.45, 0]} />
-      <mesh geometry={nodes.cubesat_silver_sides.geometry} material={materials.silver} position={[-0.116, 2.501, 0.056]} rotation={[0, -0.45, 0]} />
-      <mesh geometry={nodes.cubesat_sides.geometry} material={materials['phx-gray']} position={[-0.645, 1.986, 0.308]} rotation={[0, -0.45, 0]} />
+      <mesh geometry={nodes.antenna.geometry} material={materials.paper} position={[-0.463, 2.368, 0.368]} rotation={[0, -0.45, 0]}>
+			<meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials.paper.name)} />
+      </mesh>
+      <mesh geometry={nodes.antenna_board.geometry} material={materials['dark-brown']} position={[-0.467, 2.354, 0.356]} rotation={[0, -0.45, 0]}>
+			<meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['dark-brown'].name)} />
+      </mesh>
+      <mesh geometry={nodes.cubesat_solar_panels.geometry} material={materials.black} position={[0.24, 2.066, -0.032]} rotation={[0, -0.45, 0]}>
+			<meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials.black.name)} />
+      </mesh>
+      <mesh geometry={nodes.cubesat_lens.geometry} material={materials.black} position={[-0.783, 1.821, 0.324]} rotation={[0, -0.45, 0]}>
+			<meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials.black.name)} />
+      </mesh>
+      <mesh geometry={nodes.cubesat_silver_sides.geometry} material={materials.silver} position={[-0.116, 2.501, 0.056]} rotation={[0, -0.45, 0]}>
+			<meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials.silver.name)} />
+      </mesh>
+      <mesh geometry={nodes.cubesat_sides.geometry} material={materials['phx-gray']} position={[-0.645, 1.986, 0.308]} rotation={[0, -0.45, 0]}>
+			<meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['phx-gray'].name)} />
+      </mesh>
     </group>
   )
 }

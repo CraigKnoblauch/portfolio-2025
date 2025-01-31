@@ -8,23 +8,54 @@ import { useGLTF } from '@react-three/drei'
 
 export function RabbitHoleModel(props) {
   const { nodes, materials } = useGLTF('./models/rabbit-hole.glb')
+  const matcapManager = props.matcapManager;
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.rabbit_hole_ground_rear.geometry} material={materials.ground} position={[0.021, 0.053, -0.036]} rotation={[0, -1.571, 0]} />
-      <mesh geometry={nodes.rabbit_hole_portal.geometry} material={nodes.rabbit_hole_portal.material} position={[-0.449, -0.17, 3.568]} rotation={[0, -1.571, 0]} />
-      <mesh geometry={nodes.canopy.geometry} material={materials['leaf-green']} position={[-1.368, 4.315, 2.363]} rotation={[0, -1.571, 0]} />
-      <mesh geometry={nodes.tree.geometry} material={materials['dark-brown']} position={[-1.194, 2.609, 2.559]} rotation={[0, -1.571, 0]} />
-      <mesh geometry={nodes.hedge008.geometry} material={materials['leaf-green']} position={[-6.759, 1.064, 1.066]} rotation={[Math.PI, -0.365, Math.PI]} />
-      <mesh geometry={nodes.stem1004.geometry} material={materials['dark-brown']} position={[3.503, 0.281, 4.824]} rotation={[0, -1.571, 0]} />
-      <mesh geometry={nodes['tall-bush1'].geometry} material={materials['leaf-green']} position={[-4.464, 1.51, 3.856]} rotation={[0, -1.571, 0]} />
-      <mesh geometry={nodes['tall-stem1'].geometry} material={materials['dark-brown']} position={[-4.496, 0.466, 3.784]} rotation={[0, -1.571, 0]} />
-      <mesh geometry={nodes['tall-stem2'].geometry} material={materials['dark-brown']} position={[5.312, 0.572, 5.622]} rotation={[0, -1.552, 0]} />
-      <mesh geometry={nodes['wide-bush1'].geometry} material={materials['leaf-green']} position={[3.589, 0.797, 4.756]} rotation={[0, -1.571, 0]} />
-      <mesh geometry={nodes['wide-bush2'].geometry} material={materials['leaf-green']} position={[5.377, 1.471, 5.632]} rotation={[0, -1.552, 0]} />
-      <mesh geometry={nodes.stem2005.geometry} material={materials['dark-brown']} position={[-6.527, 0.356, 1.272]} rotation={[Math.PI, -0.365, Math.PI]} />
-      <mesh geometry={nodes.Rock_Moss_2_Cube001.geometry} material={materials['rock-gray']} position={[-4.818, 0.186, 2.95]} rotation={[0, -1.571, 0]} />
-      <mesh geometry={nodes.Rock_Moss_2_Cube002.geometry} material={materials['rock-gray']} position={[4.376, 0.323, 6.058]} rotation={[0, -1.571, 0]} />
-      <mesh geometry={nodes.Rock_2_Cube005.geometry} material={materials['rock-gray']} position={[6.728, 0.17, 4.892]} rotation={[0, -1.571, 0]} />
+      <mesh geometry={nodes.rabbit_hole_ground_rear.geometry} material={materials.ground} position={[0.021, 0.053, -0.036]} rotation={[0, -1.571, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials.ground.name)} />
+      </mesh>
+      <mesh geometry={nodes.rabbit_hole_portal.geometry} material={nodes.rabbit_hole_portal.material} position={[-0.449, -0.17, 3.568]} rotation={[0, -1.571, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(nodes.rabbit_hole_portal.material.name)} />
+      </mesh>
+      <mesh geometry={nodes.canopy.geometry} material={materials['leaf-green']} position={[-1.368, 4.315, 2.363]} rotation={[0, -1.571, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['leaf-green'].name)} />
+      </mesh>
+      <mesh geometry={nodes.tree.geometry} material={materials['dark-brown']} position={[-1.194, 2.609, 2.559]} rotation={[0, -1.571, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['dark-brown'].name)} />
+      </mesh>
+      <mesh geometry={nodes.hedge008.geometry} material={materials['leaf-green']} position={[-6.759, 1.064, 1.066]} rotation={[Math.PI, -0.365, Math.PI]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['leaf-green'].name)} />
+      </mesh>
+      <mesh geometry={nodes.stem1004.geometry} material={materials['dark-brown']} position={[3.503, 0.281, 4.824]} rotation={[0, -1.571, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['dark-brown'].name)} />
+      </mesh>
+      <mesh geometry={nodes['tall-bush1'].geometry} material={materials['leaf-green']} position={[-4.464, 1.51, 3.856]} rotation={[0, -1.571, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['leaf-green'].name)} />
+      </mesh>
+      <mesh geometry={nodes['tall-stem1'].geometry} material={materials['dark-brown']} position={[-4.496, 0.466, 3.784]} rotation={[0, -1.571, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['dark-brown'].name)} />
+      </mesh>
+      <mesh geometry={nodes['tall-stem2'].geometry} material={materials['dark-brown']} position={[5.312, 0.572, 5.622]} rotation={[0, -1.552, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['dark-brown'].name)} />
+      </mesh>
+      <mesh geometry={nodes['wide-bush1'].geometry} material={materials['leaf-green']} position={[3.589, 0.797, 4.756]} rotation={[0, -1.571, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['leaf-green'].name)} />
+      </mesh>
+      <mesh geometry={nodes['wide-bush2'].geometry} material={materials['leaf-green']} position={[5.377, 1.471, 5.632]} rotation={[0, -1.552, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['leaf-green'].name)} />
+      </mesh>
+      <mesh geometry={nodes.stem2005.geometry} material={materials['dark-brown']} position={[-6.527, 0.356, 1.272]} rotation={[Math.PI, -0.365, Math.PI]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['dark-brown'].name)} />
+      </mesh>
+      <mesh geometry={nodes.Rock_Moss_2_Cube001.geometry} material={materials['rock-gray']} position={[-4.818, 0.186, 2.95]} rotation={[0, -1.571, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['rock-gray'].name)} />
+      </mesh>
+      <mesh geometry={nodes.Rock_Moss_2_Cube002.geometry} material={materials['rock-gray']} position={[4.376, 0.323, 6.058]} rotation={[0, -1.571, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['rock-gray'].name)} />
+      </mesh>
+      <mesh geometry={nodes.Rock_2_Cube005.geometry} material={materials['rock-gray']} position={[6.728, 0.17, 4.892]} rotation={[0, -1.571, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['rock-gray'].name)} />
+      </mesh>
     </group>
   )
 }

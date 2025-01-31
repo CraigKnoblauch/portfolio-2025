@@ -8,24 +8,57 @@ import { useGLTF } from '@react-three/drei'
 
 export function PhoenixLogoModel(props) {
   const { nodes, materials } = useGLTF('./models/phoenix-logo.glb')
+  const matcapManager = props.matcapManager;
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.phx_logo_claws.geometry} material={materials.gold} position={[0.449, 1.009, 0.035]} rotation={[0, -0.657, 0]} />
-      <mesh geometry={nodes.phx_logo_beak.geometry} material={materials.gold} position={[0.292, 1.19, -0.039]} rotation={[0, -0.657, 0]} />
-      <mesh geometry={nodes.phx_logo_under_wing.geometry} material={materials['phx-under-wing-orange']} position={[0.426, 1.149, -0.024]} rotation={[0, -0.657, 0]} />
-      <mesh geometry={nodes.phx_logo_body.geometry} material={materials['phx-body-orange']} position={[0.35, 1.063, 0.015]} rotation={[0, -0.657, 0]} />
-      <mesh geometry={nodes.phx_logo_eye.geometry} material={materials['phx-under-wing-orange']} position={[0.343, 1.242, -0.063]} rotation={[0, -0.657, 0]} />
-      <mesh geometry={nodes.phx_logo_dark_gray_edges.geometry} material={materials['phx-gray']} position={[0.034, 1.454, -0.147]} rotation={[0, -0.657, 0]} />
-      <mesh geometry={nodes.phx_logo_lite_gray_panels.geometry} material={materials['phx-lite-gray']} position={[-0.002, 1.169, -0.024]} rotation={[0, -0.657, 0]} />
-      <mesh geometry={nodes.phx_logo_solar_panels.geometry} material={materials['phx-gray']} position={[-0.007, 1.346, -0.1]} rotation={[0, -0.657, 0]} />
-      <mesh geometry={nodes.phx_logo_gray_cam_ring.geometry} material={materials['phx-gray']} position={[0.003, 0.948, 0.072]} rotation={[0, -0.657, 0]} />
-      <mesh geometry={nodes.phx_logo_blue_cam_ring.geometry} material={materials['phx-blue']} position={[0.004, 0.929, 0.08]} rotation={[0, -0.657, 0]} />
-      <mesh geometry={nodes.phx_logo_land.geometry} material={materials['phx-green']} position={[-0.482, 0.956, 0.078]} rotation={[0, -0.657, 0]} />
-      <mesh geometry={nodes.phx_logo_water.geometry} material={materials['phx-blue']} position={[-0.465, 0.939, 0.085]} rotation={[0, -0.657, 0]} />
-      <mesh geometry={nodes.phx_logo_text_blue_ring.geometry} material={materials['phx-blue']} position={[0.018, 0.94, 0.075]} rotation={[0, -0.657, 0]} />
-      <mesh geometry={nodes.phx_logo_text.geometry} material={materials.gold} position={[-0.017, 0.946, 0.073]} rotation={[0, -0.657, 0]} />
-      <mesh geometry={nodes.phx_logo_space.geometry} material={materials.black} position={[0.177, 1.115, -0.004]} rotation={[0, -0.657, 0]} />
-      <mesh geometry={nodes.phx_logo_stars.geometry} material={materials['bright-white']} position={[0.136, 1.111, -0.002]} rotation={[0, -0.657, 0]} />
+      <mesh geometry={nodes.phx_logo_claws.geometry} material={materials.gold} position={[0.449, 1.009, 0.035]} rotation={[0, -0.657, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials.gold.name)} />
+      </mesh>
+      <mesh geometry={nodes.phx_logo_beak.geometry} material={materials.gold} position={[0.292, 1.19, -0.039]} rotation={[0, -0.657, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials.gold.name)} />
+      </mesh>
+      <mesh geometry={nodes.phx_logo_under_wing.geometry} material={materials['phx-under-wing-orange']} position={[0.426, 1.149, -0.024]} rotation={[0, -0.657, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['phx-under-wing-orange'].name)} />
+      </mesh>
+      <mesh geometry={nodes.phx_logo_body.geometry} material={materials['phx-body-orange']} position={[0.35, 1.063, 0.015]} rotation={[0, -0.657, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['phx-body-orange'].name)} />
+      </mesh>
+      <mesh geometry={nodes.phx_logo_eye.geometry} material={materials['phx-under-wing-orange']} position={[0.343, 1.242, -0.063]} rotation={[0, -0.657, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['phx-under-wing-orange'].name)} />
+      </mesh>
+      <mesh geometry={nodes.phx_logo_dark_gray_edges.geometry} material={materials['phx-gray']} position={[0.034, 1.454, -0.147]} rotation={[0, -0.657, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['phx-gray'].name)} />
+      </mesh>
+      <mesh geometry={nodes.phx_logo_lite_gray_panels.geometry} material={materials['phx-lite-gray']} position={[-0.002, 1.169, -0.024]} rotation={[0, -0.657, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['phx-lite-gray'].name)} />
+      </mesh>
+      <mesh geometry={nodes.phx_logo_solar_panels.geometry} material={materials['phx-gray']} position={[-0.007, 1.346, -0.1]} rotation={[0, -0.657, 0]}>
+			<meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['phx-gray'].name)} />
+      </mesh>
+      <mesh geometry={nodes.phx_logo_gray_cam_ring.geometry} material={materials['phx-gray']} position={[0.003, 0.948, 0.072]} rotation={[0, -0.657, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['phx-gray'].name)} />
+      </mesh>
+      <mesh geometry={nodes.phx_logo_blue_cam_ring.geometry} material={materials['phx-blue']} position={[0.004, 0.929, 0.08]} rotation={[0, -0.657, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['phx-blue'].name)} />
+      </mesh>
+      <mesh geometry={nodes.phx_logo_land.geometry} material={materials['phx-green']} position={[-0.482, 0.956, 0.078]} rotation={[0, -0.657, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['phx-green'].name)} />
+      </mesh>
+      <mesh geometry={nodes.phx_logo_water.geometry} material={materials['phx-blue']} position={[-0.465, 0.939, 0.085]} rotation={[0, -0.657, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['phx-blue'].name)} />
+      </mesh>
+      <mesh geometry={nodes.phx_logo_text_blue_ring.geometry} material={materials['phx-blue']} position={[0.018, 0.94, 0.075]} rotation={[0, -0.657, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['phx-blue'].name)} />
+      </mesh>
+      <mesh geometry={nodes.phx_logo_text.geometry} material={materials.gold} position={[-0.017, 0.946, 0.073]} rotation={[0, -0.657, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials.gold.name)} />
+      </mesh>
+      <mesh geometry={nodes.phx_logo_space.geometry} material={materials.black} position={[0.177, 1.115, -0.004]} rotation={[0, -0.657, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials.black.name)} />
+      </mesh>
+      <mesh geometry={nodes.phx_logo_stars.geometry} material={materials['bright-white']} position={[0.136, 1.111, -0.002]} rotation={[0, -0.657, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['bright-white'].name)} />
+      </mesh>
     </group>
   )
 }

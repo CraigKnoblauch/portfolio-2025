@@ -8,10 +8,15 @@ import { useGLTF } from '@react-three/drei'
 
 export function GithubModel(props) {
   const { nodes, materials } = useGLTF('./models/github.glb')
+  const matcapManager = props.matcapManager;
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.github_platform.geometry} material={materials['platform-gray']} position={[0.038, 0.323, 0.006]} rotation={[0, 0.005, 0]} />
-      <mesh geometry={nodes.github_model.geometry} material={materials.black} position={[0.001, 1.122, 0.045]} rotation={[0, 0.005, 0]} />
+      <mesh geometry={nodes.github_platform.geometry} material={materials['platform-gray']} position={[0.038, 0.323, 0.006]} rotation={[0, 0.005, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['platform-gray'].name)} />
+      </mesh>
+      <mesh geometry={nodes.github_model.geometry} material={materials.black} position={[0.001, 1.122, 0.045]} rotation={[0, 0.005, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials.black.name)} />
+      </mesh>
     </group>
   )
 }

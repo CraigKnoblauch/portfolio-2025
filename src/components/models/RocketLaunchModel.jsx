@@ -8,18 +8,39 @@ import { useGLTF } from '@react-three/drei'
 
 export function RocketLaunchModel(props) {
   const { nodes, materials } = useGLTF('./models/rocket-launch.glb')
+  const matcapManager = props.matcapManager;
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.rocket_platform.geometry} material={materials['platform-gray']} position={[-0.238, 0.708, -0.221]} />
-      <mesh geometry={nodes.rocket_cradle.geometry} material={materials['rock-gray']} position={[0.347, 0.73, -0.008]} />
-      <mesh geometry={nodes.rocket.geometry} material={materials.rocket} position={[-0.029, 4.86, -0.01]} rotation={[-Math.PI, 0, -Math.PI]} />
-      <mesh geometry={nodes.rocket_nozzle_1.geometry} material={materials.silver} position={[-0.098, 0.836, -0.071]} rotation={[0, 0.844, 0]} />
-      <mesh geometry={nodes.rocket_nozzle_2.geometry} material={materials.silver} position={[0.052, 0.836, 0.063]} rotation={[0, 0.844, 0]} />
-      <mesh geometry={nodes.launch_button_platform.geometry} material={materials['platform-gray']} position={[1.452, 0.222, 1.576]} />
-      <mesh geometry={nodes.launch_button.geometry} material={materials['vanguard-red']} position={[1.452, 0.278, 1.829]} />
-      <mesh geometry={nodes.rocket_yellow_flames_2.geometry} material={nodes.rocket_yellow_flames_2.material} position={[0.063, -0.637, 0.051]} rotation={[0, 0.844, 0]} />
-      <mesh geometry={nodes.rocket_yellow_flames_1.geometry} material={nodes.rocket_yellow_flames_1.material} position={[-0.087, -0.637, -0.083]} rotation={[0, 0.844, 0]} />
-      <mesh geometry={nodes.exhaust_emitter.geometry} material={nodes.exhaust_emitter.material} position={[-1.204, 0.193, -1.198]} rotation={[Math.PI / 2, 0, 2.337]} scale={[0.29, 0.28, 0.148]} />
+      <mesh geometry={nodes.rocket_platform.geometry} material={materials['platform-gray']} position={[-0.238, 0.708, -0.221]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['platform-gray'].name)} />
+      </mesh>
+      <mesh geometry={nodes.rocket_cradle.geometry} material={materials['rock-gray']} position={[0.347, 0.73, -0.008]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['rock-gray'].name)} />
+      </mesh>
+      <mesh geometry={nodes.rocket.geometry} material={materials.rocket} position={[-0.029, 4.86, -0.01]} rotation={[-Math.PI, 0, -Math.PI]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials.rocket.name)} />
+      </mesh>
+      <mesh geometry={nodes.rocket_nozzle_1.geometry} material={materials.silver} position={[-0.098, 0.836, -0.071]} rotation={[0, 0.844, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials.silver.name)} />
+      </mesh>
+      <mesh geometry={nodes.rocket_nozzle_2.geometry} material={materials.silver} position={[0.052, 0.836, 0.063]} rotation={[0, 0.844, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials.silver.name)} />
+      </mesh>
+      <mesh geometry={nodes.launch_button_platform.geometry} material={materials['platform-gray']} position={[1.452, 0.222, 1.576]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['platform-gray'].name)} />
+      </mesh>
+      <mesh geometry={nodes.launch_button.geometry} material={materials['vanguard-red']} position={[1.452, 0.278, 1.829]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials['vanguard-red'].name)} />
+      </mesh>
+      <mesh geometry={nodes.rocket_yellow_flames_2.geometry} material={nodes.rocket_yellow_flames_2.material} position={[0.063, -0.637, 0.051]} rotation={[0, 0.844, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(nodes.rocket_yellow_flames_2.material.name)} />
+      </mesh>
+      <mesh geometry={nodes.rocket_yellow_flames_1.geometry} material={nodes.rocket_yellow_flames_1.material} position={[-0.087, -0.637, -0.083]} rotation={[0, 0.844, 0]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(nodes.rocket_yellow_flames_1.material.name)} />
+      </mesh>
+      <mesh geometry={nodes.exhaust_emitter.geometry} material={nodes.exhaust_emitter.material} position={[-1.204, 0.193, -1.198]} rotation={[Math.PI / 2, 0, 2.337]} scale={[0.29, 0.28, 0.148]}>
+			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(nodes.exhaust_emitter.material.name)} />
+      </mesh>
     </group>
   )
 }
