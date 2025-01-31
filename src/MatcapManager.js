@@ -1,5 +1,5 @@
 import { useLoader } from '@react-three/fiber';
-import { MeshMatcapMaterial, TextureLoader } from 'three';
+import { TextureLoader } from 'three';
 import { matcapImages } from 'src/matcapImages.js';
 
 /**
@@ -21,9 +21,7 @@ export default class MatcapManager {
     loadMatcaps() {
         matcapImages.forEach((imageFilename) => {
             const materialName = imageFilename.split('.')[0]; // Remove the file extension
-            const texture = useLoader(TextureLoader, ['./matcaps/' + imageFilename]);
-            this.matcaps[materialName] = new MeshMatcapMaterial() // Load the matcap
-            this.matcaps[materialName].matcap = texture;
+            [this.matcaps[materialName]] = useLoader(TextureLoader, ['./matcaps/' + imageFilename]); // Load the matcap
         });
     }
 
