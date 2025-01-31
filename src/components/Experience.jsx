@@ -10,10 +10,18 @@ import { LinkedinModel } from "src/components/models/LinkedinModel"
 import { MailboxModel } from "src/components/models/MailboxModel"
 import { RabbitHoleModel } from "src/components/models/RabbitHoleModel"
 import MatcapManager from "src/MatcapManager"
+import { useRef } from "react"
+import { useFrame } from "@react-three/fiber"
 
 export const Experience = () => {
 
     const matcapManager = new MatcapManager();
+
+    const ref = useRef();
+
+    useFrame(() => {
+        ref.current.rotation.y += 0.01;
+    })
 
     return <>
         <OrbitControls />
@@ -23,7 +31,7 @@ export const Experience = () => {
         <RocketLaunchModel matcapManager={matcapManager} />
         <NrlModel matcapManager={matcapManager} />
         <PhoenixLogoModel matcapManager={matcapManager} />
-        <CubesatModel matcapManager={matcapManager} />
+        <CubesatModel ref={ref} matcapManager={matcapManager} />
         <GithubModel matcapManager={matcapManager} />
         <LinkedinModel matcapManager={matcapManager} />
         <MailboxModel matcapManager={matcapManager} />
