@@ -1,10 +1,12 @@
 import { OrbitControls } from "@react-three/drei"
-import { Vanguard } from "src/components/Vanguard"
+import { VanguardModel } from "src/components/models/VanguardModel"
+import { AsuModel } from "src/components/models/AsuModel"
 
 export const Experience = () => {
     return <>
         <OrbitControls />
-        <ambientLight intensity={1} />
-        <Vanguard />
+        <ambientLight intensity={2} />
+        {/* <VanguardModel /> */}
+        <AsuModel />
     </>
 }

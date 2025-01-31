@@ -6,7 +6,7 @@ Command: npx gltfjsx@6.2.16 vanguard.glb
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export function Vanguard(props) {
+export function VanguardModel(props) {
   const { nodes, materials } = useGLTF('./models/vanguard.glb')
   return (
     <group {...props} dispose={null}>
