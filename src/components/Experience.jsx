@@ -3,7 +3,7 @@ import { VanguardModel } from "src/components/models/VanguardModel"
 import { AsuModel } from "src/components/models/AsuModel"
 import { RocketLaunchModel } from "src/components/models/RocketLaunchModel"
 import { NrlModel } from "src/components/models/NrlModel"
-import { PhoenixLogoModel } from "src/components/models/PhoenixLogoModel"
+import { PhoenixLogoLiteModel } from "src/components/models/PhoenixLogoLiteModel"
 import { CubesatModel } from "src/components/models/CubesatModel"
 import { GithubModel } from "src/components/models/GithubModel"
 import { LinkedinModel } from "src/components/models/LinkedinModel"
@@ -30,11 +30,11 @@ export const Experience = () => {
         <AsuModel matcapManager={matcapManager} />
         <RocketLaunchModel matcapManager={matcapManager} />
         <NrlModel matcapManager={matcapManager} />
-        <PhoenixLogoModel matcapManager={matcapManager} />
         <CubesatModel ref={ref} matcapManager={matcapManager} />
         <GithubModel matcapManager={matcapManager} />
         <LinkedinModel matcapManager={matcapManager} />
         <MailboxModel matcapManager={matcapManager} />
         <RabbitHoleModel matcapManager={matcapManager} />
+        <PhoenixLogoLiteModel />
     </>
 }

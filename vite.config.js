@@ -5,7 +5,7 @@ import glsl from 'vite-plugin-glsl'
 import path from 'path'
 import fs from 'fs'
 
-function removeTestAssets() {
+function removeAssets() {
     return {
         name: 'remove-test-assets',
         resolveId (source) {
@@ -15,12 +15,14 @@ function removeTestAssets() {
             const outDir = outputOptions.dir
             const testAssetsDir = path.resolve(outDir, 'test')
             fs.rmdir(testAssetsDir, { recursive: true }, () => console.log(`Deleted ${testAssetsDir}`))
+            const backupAssetDir = path.resolve(outDir, 'backup')
+            fs.rmdir(backupAssetDir, { recursive: true }, () => console.log(`Deleted ${backupAssetDir}`))
         }
     }
 }
 
 export default defineConfig({
-    plugins: [removeTestAssets(), react(), glsl(), tailwindcss()],
+    plugins: [removeAssets(), react(), glsl(), tailwindcss()],
 //    root: 'src/',
 //    publicDir: '../public',
 //    base: './',
