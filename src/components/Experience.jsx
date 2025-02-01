@@ -9,6 +9,9 @@ import { GithubModel } from "src/components/models/GithubModel"
 import { LinkedinModel } from "src/components/models/LinkedinModel"
 import { MailboxModel } from "src/components/models/MailboxModel"
 import { RabbitHoleModel } from "src/components/models/RabbitHoleModel"
+
+import { NrlSection } from "src/components/sections/NrlSection"
+
 import MatcapManager from "src/MatcapManager"
 import { useRef } from "react"
 import { useFrame } from "@react-three/fiber"
@@ -19,14 +22,14 @@ export const Experience = () => {
 
     const ref = useRef();
 
-    useFrame(() => {
-        ref.current.rotation.y += 0.01;
-    })
+    // useFrame(() => {
+    //     ref.current.rotation.y += 0.01;
+    // })
 
     return <>
         <OrbitControls />
         <ambientLight intensity={2} />
-        <VanguardModel matcapManager={matcapManager} />
+        {/* <VanguardModel matcapManager={matcapManager} />
         <AsuModel matcapManager={matcapManager} />
         <RocketLaunchModel matcapManager={matcapManager} />
         <NrlModel matcapManager={matcapManager} />
@@ -35,6 +38,7 @@ export const Experience = () => {
         <LinkedinModel matcapManager={matcapManager} />
         <MailboxModel matcapManager={matcapManager} />
         <RabbitHoleModel matcapManager={matcapManager} />
-        <PhoenixLogoLiteModel />
+        <PhoenixLogoLiteModel /> */}
+        <NrlSection matcapManager={matcapManager} />
     </>
 }
