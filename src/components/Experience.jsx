@@ -1,16 +1,12 @@
 import { OrbitControls } from "@react-three/drei"
-import { VanguardModel } from "src/components/models/VanguardModel"
-import { AsuModel } from "src/components/models/AsuModel"
-import { RocketLaunchModel } from "src/components/models/RocketLaunchModel"
-import { NrlModel } from "src/components/models/NrlModel"
-import { PhoenixLogoLiteModel } from "src/components/models/PhoenixLogoLiteModel"
-import { CubesatModel } from "src/components/models/CubesatModel"
-import { GithubModel } from "src/components/models/GithubModel"
-import { LinkedinModel } from "src/components/models/LinkedinModel"
-import { MailboxModel } from "src/components/models/MailboxModel"
-import { RabbitHoleModel } from "src/components/models/RabbitHoleModel"
 
+import { AsuSection } from "src/components/sections/AsuSection"
+import { PhoenixSection } from "src/components/sections/PhoenixSection"
+import { RocketLaunchSection } from "src/components/sections/RocketLaunchSection"
+import { VanguardSection } from "src/components/sections/VanguardSection"
 import { NrlSection } from "src/components/sections/NrlSection"
+import { RabbitHoleSection } from "src/components/sections/RabbitHoleSection"
+// NOTE See Cubesat model for how to use forward ref
 
 import MatcapManager from "src/MatcapManager"
 import { useRef } from "react"
@@ -29,16 +25,11 @@ export const Experience = () => {
     return <>
         <OrbitControls />
         <ambientLight intensity={2} />
-        {/* <VanguardModel matcapManager={matcapManager} />
-        <AsuModel matcapManager={matcapManager} />
-        <RocketLaunchModel matcapManager={matcapManager} />
-        <NrlModel matcapManager={matcapManager} />
-        <CubesatModel ref={ref} matcapManager={matcapManager} />
-        <GithubModel matcapManager={matcapManager} />
-        <LinkedinModel matcapManager={matcapManager} />
-        <MailboxModel matcapManager={matcapManager} />
-        <RabbitHoleModel matcapManager={matcapManager} />
-        <PhoenixLogoLiteModel /> */}
+        <AsuSection matcapManager={matcapManager} />
+        <PhoenixSection matcapManager={matcapManager} />
+        <RocketLaunchSection matcapManager={matcapManager} />
+        <VanguardSection matcapManager={matcapManager} />
         <NrlSection matcapManager={matcapManager} />
+        <RabbitHoleSection matcapManager={matcapManager} />
     </>
 }
