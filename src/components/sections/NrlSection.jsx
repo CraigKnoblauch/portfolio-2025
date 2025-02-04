@@ -2,11 +2,18 @@ import { NrlModel } from "src/components/models/NrlModel"
 import { InformationCard } from "src/components/InformationCard"
 import { Html } from "@react-three/drei"
 import * as THREE from "three"
+import { useEffect, useRef } from "react"
 
 export const NrlSection = (props) => {
+	const ref = useRef()
+
+	useEffect(() => {
+		ref.current.position.y = props.height
+	}, [])
+
     return <>
-        <NrlModel matcapManager={props.matcapManager} />
-        <Html as='div' className="relative" position={new THREE.Vector3(0, 0, 0)}>
+        <NrlModel ref={ref} matcapManager={props.matcapManager} />
+        <Html as='div' className="relative" position={new THREE.Vector3(0, props.height, 0)}>
             <InformationCard 
                 title={"U.S. Naval Research Laboratory"} 
                 position={"Software Engineer in Spacecraft Engineering RDT&E"} 

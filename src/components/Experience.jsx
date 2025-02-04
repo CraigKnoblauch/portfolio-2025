@@ -1,10 +1,12 @@
 import { OrbitControls } from "@react-three/drei"
+import { ScrollControls } from "@react-three/drei"
 
 import { AsuSection } from "src/components/sections/AsuSection"
 import { PhoenixSection } from "src/components/sections/PhoenixSection"
 import { RocketLaunchSection } from "src/components/sections/RocketLaunchSection"
 import { VanguardSection } from "src/components/sections/VanguardSection"
 import { NrlSection } from "src/components/sections/NrlSection"
+import { ContactSection } from "src/components/sections/ContactSection"
 import { RabbitHoleSection } from "src/components/sections/RabbitHoleSection"
 // NOTE See Cubesat model for how to use forward ref
 
@@ -23,13 +25,16 @@ export const Experience = () => {
     // })
 
     return <>
-        <OrbitControls />
+        <OrbitControls enableZoom={false} />
         <ambientLight intensity={2} />
-        <AsuSection matcapManager={matcapManager} />
-        <PhoenixSection matcapManager={matcapManager} />
-        <RocketLaunchSection matcapManager={matcapManager} />
-        <VanguardSection matcapManager={matcapManager} />
-        <NrlSection matcapManager={matcapManager} />
-        <RabbitHoleSection matcapManager={matcapManager} />
+        <ScrollControls pages={7} damping={0.25}>
+            {/* <AsuSection          height={0} matcapManager={matcapManager} /> */}
+            {/* <PhoenixSection      height={0} matcapManager={matcapManager} /> */}
+            {/* <RocketLaunchSection height={0} matcapManager={matcapManager} /> */}
+            {/* <VanguardSection     height={0} matcapManager={matcapManager} /> */}
+            {/* <NrlSection          height={0} matcapManager={matcapManager} /> */}
+            {/* <RabbitHoleSection   height={0} matcapManager={matcapManager} /> */}
+            {/* <ContactSection       height={0} matcapManager={matcapManager} /> */}
+        </ScrollControls>
     </>
 }

@@ -6,14 +6,14 @@ NOTE This has been deprecated in favor of the PhoenixLogoLite.
 Keeping it here for posterity.
 */
 
-import React, { useRef } from 'react'
+import React, { forwardRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export function PhoenixLogoModel(props) {
+export const PhoenixLogoModel = forwardRef((props, ref) => {
   const { nodes, materials } = useGLTF('./models/phoenix-logo.glb')
   const matcapManager = props.matcapManager;
   return (
-    <group {...props} dispose={null}>
+    <group ref={ref} {...props} dispose={null}>
       <mesh geometry={nodes.phx_logo_claws.geometry} material={materials.gold} position={[0.449, 1.009, 0.035]} rotation={[0, -0.657, 0]}>
 			  <meshMatcapMaterial matcap={matcapManager.getMatcapByName(materials.gold.name)} />
       </mesh>
@@ -64,6 +64,6 @@ export function PhoenixLogoModel(props) {
       </mesh>
     </group>
   )
-}
+})
 
 useGLTF.preload('./models/phoenix-logo.glb')

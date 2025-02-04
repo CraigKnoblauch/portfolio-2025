@@ -1,17 +1,25 @@
-import { NrlModel } from "src/components/models/NrlModel"
+import { VanguardModel } from "src/components/models/VanguardModel"
 import { InformationCard } from "src/components/InformationCard"
 import { Html } from "@react-three/drei"
 import * as THREE from "three"
+import { useEffect, useRef } from "react"
 
 export const VanguardSection = (props) => {
+
+    const ref = useRef()
+
+    useEffect(() => {
+        // ref.current.position.y = props.height
+    }, [])
+
     return <>
-        <NrlModel matcapManager={props.matcapManager} />
-        <Html as='div' className="relative" position={new THREE.Vector3(0, 0, 0)}>
+        <VanguardModel ref={ref} matcapManager={props.matcapManager} />
+        <Html as='div' className="relative" position={new THREE.Vector3(0, props.height, 0)}>
             <InformationCard 
-                title={"U.S. Naval Research Laboratory"} 
-                position={"Software Engineer in Spacecraft Engineering RDT&E"} 
-                startDate={'Jan. 2022'} endDate={'Present'} 
-                description={"Write software for the research of novel space technologies for national defense. Independently architect, develop, perform quality assurance, and effectively balance project and development needs through clear communication with management, stakeholders, and wider system teams."}
+                title={"The Vanguard Group"} 
+                position={"Big Data Engineer"} 
+                startDate={'Aug. 2019'} endDate={'Nov. 2021'} 
+                description={"TODO Did some stuff for Vanguard"}
             />
         </Html>
     </>

@@ -1,5 +1,5 @@
 import { useLoader } from '@react-three/fiber';
-import { TextureLoader } from 'three';
+import { TextureLoader, SRGBColorSpace } from 'three';
 import { matcapImages } from 'src/matcapImages.js';
 
 /**
@@ -22,6 +22,7 @@ export default class MatcapManager {
         matcapImages.forEach((imageFilename) => {
             const materialName = imageFilename.split('.')[0]; // Remove the file extension
             [this.matcaps[materialName]] = useLoader(TextureLoader, ['./matcaps/' + imageFilename]); // Load the matcap
+            this.matcaps[materialName].colorSpace = SRGBColorSpace;
         });
     }
 
