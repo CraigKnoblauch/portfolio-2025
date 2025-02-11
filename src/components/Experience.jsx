@@ -1,21 +1,12 @@
-import { OrbitControls, useGLTF, useScroll } from "@react-three/drei"
+import { OrbitControls, useGLTF, useScroll, Html, Scroll } from "@react-three/drei"
 import { ScrollControls } from "@react-three/drei"
 import * as THREE from "three"
 import gsap from "gsap"
-
-// import { AsuSection } from "src/components/sections/AsuSection"
-// import { PhoenixSection } from "src/components/sections/PhoenixSection"
-// import { RocketLaunchSection } from "src/components/sections/RocketLaunchSection"
-// import { VanguardSection } from "src/components/sections/VanguardSection"
-// import { NrlSection } from "src/components/sections/NrlSection"
-// import { ContactSection } from "src/components/sections/ContactSection"
-// import { RabbitHoleSection } from "src/components/sections/RabbitHoleSection"
-// NOTE See Cubesat model for how to use forward ref
-
 import MatcapManager from "src/MatcapManager"
 import { useLayoutEffect, useRef } from "react"
 import { useFrame } from "@react-three/fiber"
-import { use } from "react"
+
+import { Overlay } from "src/components/Overlay"
 
 export const Experience = () => {
 
@@ -119,43 +110,44 @@ export const Experience = () => {
     return <>
         <OrbitControls enableZoom={false} />
         <ambientLight intensity={2} />
+        <Overlay />
         <group ref={masterRef} dispose={null} position={new THREE.Vector3(0, 0, 0)}>
             <group ref={asuRef} dispose={null} position={new THREE.Vector3(0, -asuPos*pageHeight, 0)}>
-                    <primitive object={asuModel.nodes.asu_platform} material={platformGray} />
-                    <primitive object={asuModel.nodes.asu_soil} material={asuSoil} />
-                    <primitive object={asuModel.nodes.asu_dark_tall_rock} material={darkBrown} />
-                    <primitive object={asuModel.nodes.asu_lite_tall_rock} material={asuLiteRock} />
-                    <primitive object={asuModel.nodes.asu_dark_rock001} material={darkBrown} />
-                    <primitive object={asuModel.nodes.asu_dark_rock002} material={darkBrown} />
-                    <primitive object={asuModel.nodes.asu_lite_rock001} material={asuLiteRock} />
-                    <primitive object={asuModel.nodes.asu_lite_rock002} material={asuLiteRock} />
-                    <primitive object={asuModel.nodes.asu_lite_rock003} material={asuLiteRock} />
-                    <primitive object={asuModel.nodes.asu_lite_rock004} material={asuLiteRock} />
-                    <primitive object={asuModel.nodes.asu_dark_rock003} material={darkBrown} />
-                    <primitive object={asuModel.nodes.asu_dark_rock004} material={darkBrown} />
-                    <primitive object={asuModel.nodes.asu_dark_rock005} material={darkBrown} />
-                    <primitive object={asuModel.nodes.asu_dark_rock006} material={darkBrown} />
-                    <primitive object={asuModel.nodes.asu_dark_rock007} material={darkBrown} />
-                    <primitive object={asuModel.nodes.asu_dark_rock008} material={darkBrown} />
-                    <primitive object={asuModel.nodes.asu_lite_rock005} material={asuLiteRock} />
-                    <primitive object={asuModel.nodes.asu_dark_rock009} material={darkBrown} />
-                    <primitive object={asuModel.nodes.asu_dark_rock} material={darkBrown} />
-                    <primitive object={asuModel.nodes.asu_lite_rock} material={asuLiteRock} />
-                    <primitive object={asuModel.nodes.asu_cactus002} material={leafGreen} />
-                    <primitive object={asuModel.nodes.asu_cactus001} material={leafGreen} />
-                    <primitive object={asuModel.nodes.asu_cactus} material={leafGreen} />
-                    <primitive object={asuModel.nodes.asu_ground_cactus} material={leafGreen} />
-                    <primitive object={asuModel.nodes.asu_ground_cactus001} material={leafGreen} />
-                    <primitive object={asuModel.nodes.asu_ground_cactus002} material={leafGreen} />
-                    <primitive object={asuModel.nodes.asu_logo_body} material={asuRed} />
-                    <primitive object={asuModel.nodes.asu_logo_sun} material={gold} />
-                    <primitive object={asuModel.nodes.grad_cap_base} material={gradCap} />
-                    <primitive object={asuModel.nodes.grad_cap_top} material={gradCap} />
-                    <primitive object={asuModel.nodes.grad_cap_button} material={gradCap} />
-                    <primitive object={asuModel.nodes.grad_cap_cord} material={gold} />
-                    <primitive object={asuModel.nodes.grad_cap_tassel} material={gold} />
-                    <primitive object={asuModel.nodes.asu_cactus_flower001} material={cactusFlowerPink} />
-                    <primitive object={asuModel.nodes.asu_cactus_flower} material={cactusFlowerPink} />
+                <primitive object={asuModel.nodes.asu_platform} material={platformGray} />
+                <primitive object={asuModel.nodes.asu_soil} material={asuSoil} />
+                <primitive object={asuModel.nodes.asu_dark_tall_rock} material={darkBrown} />
+                <primitive object={asuModel.nodes.asu_lite_tall_rock} material={asuLiteRock} />
+                <primitive object={asuModel.nodes.asu_dark_rock001} material={darkBrown} />
+                <primitive object={asuModel.nodes.asu_dark_rock002} material={darkBrown} />
+                <primitive object={asuModel.nodes.asu_lite_rock001} material={asuLiteRock} />
+                <primitive object={asuModel.nodes.asu_lite_rock002} material={asuLiteRock} />
+                <primitive object={asuModel.nodes.asu_lite_rock003} material={asuLiteRock} />
+                <primitive object={asuModel.nodes.asu_lite_rock004} material={asuLiteRock} />
+                <primitive object={asuModel.nodes.asu_dark_rock003} material={darkBrown} />
+                <primitive object={asuModel.nodes.asu_dark_rock004} material={darkBrown} />
+                <primitive object={asuModel.nodes.asu_dark_rock005} material={darkBrown} />
+                <primitive object={asuModel.nodes.asu_dark_rock006} material={darkBrown} />
+                <primitive object={asuModel.nodes.asu_dark_rock007} material={darkBrown} />
+                <primitive object={asuModel.nodes.asu_dark_rock008} material={darkBrown} />
+                <primitive object={asuModel.nodes.asu_lite_rock005} material={asuLiteRock} />
+                <primitive object={asuModel.nodes.asu_dark_rock009} material={darkBrown} />
+                <primitive object={asuModel.nodes.asu_dark_rock} material={darkBrown} />
+                <primitive object={asuModel.nodes.asu_lite_rock} material={asuLiteRock} />
+                <primitive object={asuModel.nodes.asu_cactus002} material={leafGreen} />
+                <primitive object={asuModel.nodes.asu_cactus001} material={leafGreen} />
+                <primitive object={asuModel.nodes.asu_cactus} material={leafGreen} />
+                <primitive object={asuModel.nodes.asu_ground_cactus} material={leafGreen} />
+                <primitive object={asuModel.nodes.asu_ground_cactus001} material={leafGreen} />
+                <primitive object={asuModel.nodes.asu_ground_cactus002} material={leafGreen} />
+                <primitive object={asuModel.nodes.asu_logo_body} material={asuRed} />
+                <primitive object={asuModel.nodes.asu_logo_sun} material={gold} />
+                <primitive object={asuModel.nodes.grad_cap_base} material={gradCap} />
+                <primitive object={asuModel.nodes.grad_cap_top} material={gradCap} />
+                <primitive object={asuModel.nodes.grad_cap_button} material={gradCap} />
+                <primitive object={asuModel.nodes.grad_cap_cord} material={gold} />
+                <primitive object={asuModel.nodes.grad_cap_tassel} material={gold} />
+                <primitive object={asuModel.nodes.asu_cactus_flower001} material={cactusFlowerPink} />
+                <primitive object={asuModel.nodes.asu_cactus_flower} material={cactusFlowerPink} />
             </group>
             <group ref={phxLogoLiteRef} dispose={null} position={new THREE.Vector3(0, -phxPos*pageHeight, 0)}>
                 <primitive object={phxLogoLiteModel.nodes.logo} material={phxLogoLiteModel.materials['wrapped-logo']} />
