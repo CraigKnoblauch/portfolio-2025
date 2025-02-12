@@ -1,4 +1,4 @@
-import { OrbitControls, useGLTF, useScroll, Html, Scroll } from "@react-three/drei"
+import { OrbitControls, useGLTF, useScroll, Html, Scroll, useTexture } from "@react-three/drei"
 import { ScrollControls } from "@react-three/drei"
 import * as THREE from "three"
 import gsap from "gsap"
@@ -41,6 +41,12 @@ export const Experience = () => {
 	const softwareRed = new THREE.MeshMatcapMaterial({matcap: matcapManager.getMatcapByName('software-red')})
 	const vanguardRed = new THREE.MeshMatcapMaterial({matcap: matcapManager.getMatcapByName('vanguard-red')})
 
+    // NOTE Use rocket-uv-no-bg.png when blending with the matcap
+    const rocketTexture = useTexture('./textures/rocket-uv-map.jpg')
+    rocketTexture.flipY = false
+    rocketTexture.extend = true
+    rocketTexture.colorSpace = THREE.SRGBColorSpace
+
     /**
      * Load models
      */
@@ -73,15 +79,15 @@ export const Experience = () => {
     /**
      * Set page height and postions for each group in the sequence
      */
-    const pageHeight = 10
+    const pageHeight = 4
     const numPages = 8
-    const asuPos = 1
-    const phxPos = 2
-    const rocketPos = 3
-    const vanguardPos = 4
-    const nrlPos = 5
-    const contactPos = 6
-    const rabbitHolePos = 7
+    const asuPos = 2
+    const phxPos = 3
+    const rocketPos = 4
+    const vanguardPos = 5
+    const nrlPos = 6
+    const contactPos = 7
+    const rabbitHolePos = 8
 
     /**
      * GSAP timeline with scroll controls
@@ -163,7 +169,8 @@ export const Experience = () => {
             <group ref={rocketLaunchRef} dispose={null} position={new THREE.Vector3(0, -rocketPos*pageHeight, 0)}>
                     <primitive object={rocketLaunchModel.nodes.rocket_platform} material={platformGray} />
                     <primitive object={rocketLaunchModel.nodes.rocket_cradle} material={rockGray} />
-                    <primitive object={rocketLaunchModel.nodes.rocket} material={new THREE.MeshNormalMaterial()} />
+                    {/* TODO Blend the rocket-art.png texture with the bright white matcap in a custom shader to get rocket to look right */}
+                    <primitive object={rocketLaunchModel.nodes.rocket} material={new THREE.MeshBasicMaterial({map: rocketTexture})} />
                     <primitive object={rocketLaunchModel.nodes.rocket_nozzle_1} material={silver} />
                     <primitive object={rocketLaunchModel.nodes.rocket_nozzle_2} material={silver} />
                     <primitive object={rocketLaunchModel.nodes.launch_button_platform} material={platformGray} />
