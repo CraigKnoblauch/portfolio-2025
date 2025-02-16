@@ -1,10 +1,8 @@
-import { OrbitControls, useGLTF, useScroll, Html, Scroll, useTexture, shaderMaterial } from "@react-three/drei"
-import { ScrollControls } from "@react-three/drei"
+import { useGLTF, useScroll, useTexture, shaderMaterial } from "@react-three/drei"
 import * as THREE from "three"
-import gsap from "gsap"
 import MatcapManager from "src/MatcapManager"
-import { useLayoutEffect, useRef } from "react"
-import { useFrame, extend } from "@react-three/fiber"
+import { useRef } from "react"
+import { useFrame, extend, useThree } from "@react-three/fiber"
 
 import { Overlay } from "src/components/Overlay"
 
@@ -117,51 +115,40 @@ export const Experience = () => {
     /**
      * Set page height and postions for each group in the sequence
      */
-    const pageHeight = 4
+    const objectDistance = 4
     const numPages = 8
-    const asuPos = 2
-    const phxPos = 3
-    const rocketPos = 4
-    const vanguardPos = 5
-    const nrlPos = 6
-    const contactPos = 7
-    const rabbitHolePos = 8
+    const asuPos = 2 - 1
+    const phxPos = 3 - 1
+    const rocketPos = 4 - 1
+    const vanguardPos = 5 -1
+    const nrlPos = 6 -1
+    const contactPos = 7-1
+    const rabbitHolePos = 8-1
 
-    /**
-     * GSAP timeline with scroll controls
-     */
-    const tl = useRef()
     const scroll = useScroll()
 
     useFrame((state, delta) => {
-        tl.current.seek(scroll.offset * tl.current.duration())
-
         // Animate flames
         yellowFlamesMaterialRef1.current.uTime += delta
         yellowFlamesMaterialRef2.current.uTime += delta
 
     })
 
-    useLayoutEffect(() => {
-        tl.current = gsap.timeline()
-
-        // Vertical animation
-        tl.current.to(
-            masterRef.current.position,
-            {
-                duration: 2,
-                y: pageHeight * (numPages - 1),
-            },
-            0
-        )
-    }, [])
+    /**
+     * Scroll animation implementatoin by moving camera
+     */
+    const { viewport } = useThree();
+    useFrame((state, delta) => {
+        state.camera.position.y = -scroll.offset * objectDistance * numPages
+    })
 
     return <>
-        <OrbitControls enableZoom={false} />
+        {/* Having OrbitControls enabled conflicts with camera movement by scroll wheel */}
+        {/* <OrbitControls enableZoom={false} /> */}
         <ambientLight intensity={2} />
         <Overlay />
         <group ref={masterRef} dispose={null} position={new THREE.Vector3(0, 0, 0)}>
-            <group ref={asuRef} dispose={null} position={new THREE.Vector3(0, -asuPos*pageHeight, 0)}>
+            <group ref={asuRef} dispose={null} scale={0.5} position={new THREE.Vector3(0, -asuPos*objectDistance, 0)}>
                 <primitive object={asuModel.nodes.asu_platform} material={platformGray} />
                 <primitive object={asuModel.nodes.asu_soil} material={asuSoil} />
                 <primitive object={asuModel.nodes.asu_dark_tall_rock} material={darkBrown} />
@@ -198,10 +185,10 @@ export const Experience = () => {
                 <primitive object={asuModel.nodes.asu_cactus_flower001} material={cactusFlowerPink} />
                 <primitive object={asuModel.nodes.asu_cactus_flower} material={cactusFlowerPink} />
             </group>
-            <group ref={phxLogoLiteRef} dispose={null} position={new THREE.Vector3(0, -phxPos*pageHeight, 0)}>
+            <group ref={phxLogoLiteRef} dispose={null} position={new THREE.Vector3(0, -phxPos*objectDistance, 0)}>
                 <primitive object={phxLogoLiteModel.nodes.logo} material={phxLogoLiteModel.materials['wrapped-logo']} />
             </group>
-            <group ref={cubesatRef} dispose={null} position={new THREE.Vector3(0, -phxPos*pageHeight, 0)}>
+            <group ref={cubesatRef} dispose={null} position={new THREE.Vector3(0, -phxPos*objectDistance, 0)}>
                     <primitive object={cubesatModel.nodes.antenna} material={paper} />
                     <primitive object={cubesatModel.nodes.antenna_board} material={darkBrown} />
                     <primitive object={cubesatModel.nodes.cubesat_solar_panels} material={black} />
@@ -209,7 +196,7 @@ export const Experience = () => {
                     <primitive object={cubesatModel.nodes.cubesat_silver_sides} material={silver} />
                     <primitive object={cubesatModel.nodes.cubesat_sides} material={phxGray} />
             </group>
-            <group ref={rocketLaunchRef} dispose={null} position={new THREE.Vector3(0, -rocketPos*pageHeight, 0)}>
+            <group ref={rocketLaunchRef} dispose={null} position={new THREE.Vector3(0, -rocketPos*objectDistance, 0)}>
                     <primitive object={rocketLaunchModel.nodes.rocket_platform} material={platformGray} />
                     <primitive object={rocketLaunchModel.nodes.rocket_cradle} material={rockGray} ref={rocketCradleRef}/>
                     {/* TODO Blend the rocket-art.png texture with the bright white matcap in a custom shader to get rocket to look right */}
@@ -238,7 +225,7 @@ export const Experience = () => {
                     <primitive object={rocketLaunchModel.nodes.launch_button} material={vanguardRed} />
                     <primitive object={rocketLaunchModel.nodes.exhaust_emitter} material={new THREE.MeshNormalMaterial()} />
             </group>
-            <group ref={vanguardRef} dispose={null} position={new THREE.Vector3(0, -vanguardPos*pageHeight, 0)}>
+            <group ref={vanguardRef} dispose={null} position={new THREE.Vector3(0, -vanguardPos*objectDistance, 0)}>
                     <primitive object={vanguardModel.nodes.aws_emr_icon} material={awsOrange} />
                     <primitive object={vanguardModel.nodes.aws_glue_icon_funnel} material={awsPurple} />
                     <primitive object={vanguardModel.nodes.aws_lambda_icon} material={awsOrange} />
@@ -250,7 +237,7 @@ export const Experience = () => {
                     <primitive object={vanguardModel.nodes.aws_glue_icon_orange_objects} material={awsOrange} />
                     <primitive object={vanguardModel.nodes.python_icon_bottom} material={gold} />
             </group>
-            <group ref={nrlRef} dispose={null} position={new THREE.Vector3(0, -nrlPos*pageHeight, 0)}>
+            <group ref={nrlRef} dispose={null} position={new THREE.Vector3(0, -nrlPos*objectDistance, 0)}>
                     <primitive object={nrlModel.nodes.nrl_windows} material={black} />
                     <primitive object={nrlModel.nodes.nrl_stairs} material={paper} />
                     <primitive object={nrlModel.nodes.nrl_walls} material={brightWhite} />
@@ -260,15 +247,15 @@ export const Experience = () => {
                     <primitive object={nrlModel.nodes.nrl_collector} material={dishSupport} />
                     <primitive object={nrlModel.nodes.nrl_dish} material={platformGray} />
             </group>
-            <group ref={linkedinRef} dispose={null} position={new THREE.Vector3(0, -contactPos*pageHeight, 0)}>
+            <group ref={linkedinRef} dispose={null} position={new THREE.Vector3(0, -contactPos*objectDistance, 0)}>
                     <primitive object={linkedinModel.nodes.linkedin_platform} material={platformGray} />
                     <primitive object={linkedinModel.nodes.linkedin_icon} material={phxBlue} />
             </group>
-            <group ref={githubRef} dispose={null} position={new THREE.Vector3(0, -contactPos*pageHeight, 0)}>
+            <group ref={githubRef} dispose={null} position={new THREE.Vector3(0, -contactPos*objectDistance, 0)}>
                     <primitive object={githubModel.nodes.github_platform} material={platformGray} />
                     <primitive object={githubModel.nodes.github_model} material={black} />
             </group>
-            <group ref={mailboxRef} dispose={null} position={new THREE.Vector3(0, -contactPos*pageHeight, 0)}>
+            <group ref={mailboxRef} dispose={null} position={new THREE.Vector3(0, -contactPos*objectDistance, 0)}>
                     <primitive object={mailboxModel.nodes.mailbox_platform.geometry} material={platformGray} />
                     <primitive object={mailboxModel.nodes.mailbox_housing.geometry} material={black} />
                     <primitive object={mailboxModel.nodes.mailbox_flag.geometry} material={softwareRed} />
@@ -277,7 +264,7 @@ export const Experience = () => {
                     <primitive object={mailboxModel.nodes.letter.geometry} material={paper} />
                     <primitive object={mailboxModel.nodes.mailbox_post.geometry} material={darkBrown} />
             </group>
-            <group ref={rabbitHoleRef} dispose={null} position={new THREE.Vector3(0, -rabbitHolePos*pageHeight, 0)}>
+            <group ref={rabbitHoleRef} dispose={null} position={new THREE.Vector3(0, -rabbitHolePos*objectDistance, 0)}>
                     <primitive object={rabbitHoleModel.nodes.rabbit_hole_ground_rear} material={ground} />
                     <primitive object={rabbitHoleModel.nodes.rabbit_hole_portal} material={new THREE.MeshNormalMaterial()} />
                     <primitive object={rabbitHoleModel.nodes.canopy} material={leafGreen} />

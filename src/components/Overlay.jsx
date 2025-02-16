@@ -12,7 +12,7 @@ const Section = (props) => {
 export const Overlay = () => {
     return (
         <Scroll html>
-            <Section /> {/* placeholder for introduction section */}
+            <Section><h1>INTRODUCTION SECTION</h1></Section> {/* placeholder for introduction section */}
             <Section>
                 <InformationCard 
                         title={"Arizona State University"} 
@@ -53,8 +53,8 @@ export const Overlay = () => {
                     description={"Write software for the research of novel space technologies for national defense. Independently architect, develop, perform quality assurance, and effectively balance project and development needs through clear communication with management, stakeholders, and wider system teams."}
                 />
             </Section>
-            <Section /> {/* placeholder for contact section */}
-            <Section /> {/* placeholder for rabbit hole section */}
+            <Section><h1>CONTACT SECTION</h1></Section> {/* placeholder for contact section */}
+            <Section><h1>RABBIT HOLE SECTION</h1></Section> {/* placeholder for rabbit hole section */}
         </Scroll>
     )
 }
