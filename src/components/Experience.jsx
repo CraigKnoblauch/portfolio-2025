@@ -1,12 +1,32 @@
-import { OrbitControls, useGLTF, useScroll, Html, Scroll, useTexture } from "@react-three/drei"
+import { OrbitControls, useGLTF, useScroll, Html, Scroll, useTexture, shaderMaterial } from "@react-three/drei"
 import { ScrollControls } from "@react-three/drei"
 import * as THREE from "three"
 import gsap from "gsap"
 import MatcapManager from "src/MatcapManager"
 import { useLayoutEffect, useRef } from "react"
-import { useFrame } from "@react-three/fiber"
+import { useFrame, extend } from "@react-three/fiber"
 
 import { Overlay } from "src/components/Overlay"
+
+import yellowFlamesVertexShader from 'src/shaders/rocket-flames/yellow/vertex.glsl'
+import yellowFlamesFragmentShader from 'src/shaders/rocket-flames/yellow/fragment.glsl'
+
+/**
+ * Rocket flames
+ */
+const YellowFlamesMaterial = shaderMaterial(
+    {
+        uTime: 0,
+        uPerlinTexture: new THREE.Uniform(null),
+        uJumpyPerlinTexture: new THREE.Uniform(null),
+        uJumpyPerlinTextureVertical: 0,
+        uHotFlameColor: new THREE.Color('#fabd07'),
+        uCoolFlameColor: new THREE.Color('#077cfa')
+    },
+    yellowFlamesVertexShader,
+    yellowFlamesFragmentShader
+)
+extend({ YellowFlamesMaterial })
 
 export const Experience = () => {
 
@@ -62,6 +82,22 @@ export const Experience = () => {
 	const rabbitHoleModel = useGLTF('./models/rabbit-hole.glb')
 
     /**
+     * Rocket flames
+     */
+    // Flames perlin texture
+    const perlinTexture = useTexture('./textures/perlin.png')
+    perlinTexture.wrapS = THREE.RepeatWrapping
+    perlinTexture.wrapT = THREE.RepeatWrapping
+
+    // Texture to use for flame jumpiness
+    const jumpyPerlinTexture = useTexture('./textures/jumpy-perlin.png')
+    jumpyPerlinTexture.wrapS = THREE.RepeatWrapping
+    jumpyPerlinTexture.wrapT = THREE.RepeatWrapping
+
+    const yellowFlamesMaterialRef1 = useRef()
+    const yellowFlamesMaterialRef2 = useRef()
+
+    /**
      * Set group refs
      */
     const masterRef = useRef()
@@ -69,6 +105,8 @@ export const Experience = () => {
 	const phxLogoLiteRef = useRef()
 	const cubesatRef = useRef()
 	const rocketLaunchRef = useRef()
+    const rocketBodyRef = useRef()
+    const rocketCradleRef = useRef()
 	const vanguardRef = useRef()
 	const nrlRef = useRef()
 	const linkedinRef = useRef()
@@ -95,8 +133,13 @@ export const Experience = () => {
     const tl = useRef()
     const scroll = useScroll()
 
-    useFrame(() => {
+    useFrame((state, delta) => {
         tl.current.seek(scroll.offset * tl.current.duration())
+
+        // Animate flames
+        yellowFlamesMaterialRef1.current.uTime += delta
+        yellowFlamesMaterialRef2.current.uTime += delta
+
     })
 
     useLayoutEffect(() => {
@@ -168,15 +211,31 @@ export const Experience = () => {
             </group>
             <group ref={rocketLaunchRef} dispose={null} position={new THREE.Vector3(0, -rocketPos*pageHeight, 0)}>
                     <primitive object={rocketLaunchModel.nodes.rocket_platform} material={platformGray} />
-                    <primitive object={rocketLaunchModel.nodes.rocket_cradle} material={rockGray} />
+                    <primitive object={rocketLaunchModel.nodes.rocket_cradle} material={rockGray} ref={rocketCradleRef}/>
                     {/* TODO Blend the rocket-art.png texture with the bright white matcap in a custom shader to get rocket to look right */}
-                    <primitive object={rocketLaunchModel.nodes.rocket} material={new THREE.MeshBasicMaterial({map: rocketTexture})} />
-                    <primitive object={rocketLaunchModel.nodes.rocket_nozzle_1} material={silver} />
-                    <primitive object={rocketLaunchModel.nodes.rocket_nozzle_2} material={silver} />
+                    <group ref={rocketBodyRef}>
+                        <primitive object={rocketLaunchModel.nodes.rocket} material={new THREE.MeshBasicMaterial({map: rocketTexture})} />
+                        <primitive object={rocketLaunchModel.nodes.rocket_nozzle_1} material={silver} />
+                        <primitive object={rocketLaunchModel.nodes.rocket_nozzle_2} material={silver} />
+                        <primitive object={rocketLaunchModel.nodes.rocket_yellow_flames_1}>
+                            <yellowFlamesMaterial ref={yellowFlamesMaterialRef1} 
+                                            uPerlinTexture={perlinTexture} 
+                                            uJumpyPerlinTexture={jumpyPerlinTexture}
+                                            uJumpyPerlinTextureVertical={0.5}
+                                            transparent 
+                            />
+                        </primitive>
+                        <primitive object={rocketLaunchModel.nodes.rocket_yellow_flames_2}>
+                            <yellowFlamesMaterial ref={yellowFlamesMaterialRef2} 
+                                            uPerlinTexture={perlinTexture} 
+                                            uJumpyPerlinTexture={jumpyPerlinTexture}
+                                            uJumpyPerlinTextureVertical={0.5}
+                                            transparent 
+                            />
+                        </primitive>
+                    </group>
                     <primitive object={rocketLaunchModel.nodes.launch_button_platform} material={platformGray} />
                     <primitive object={rocketLaunchModel.nodes.launch_button} material={vanguardRed} />
-                    <primitive object={rocketLaunchModel.nodes.rocket_yellow_flames_2} material={new THREE.MeshNormalMaterial()} />
-                    <primitive object={rocketLaunchModel.nodes.rocket_yellow_flames_1} material={new THREE.MeshNormalMaterial()} />
                     <primitive object={rocketLaunchModel.nodes.exhaust_emitter} material={new THREE.MeshNormalMaterial()} />
             </group>
             <group ref={vanguardRef} dispose={null} position={new THREE.Vector3(0, -vanguardPos*pageHeight, 0)}>
