@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@theme {
+    --color-primary-white: #efefef;
+    --color-seconday-gray: #a3a3a3;
+}
+
 body, html {
   margin: 0;
   padding: 0;
