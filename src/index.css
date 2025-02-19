@@ -5,6 +5,11 @@
     --color-secondary-gray: #a3a3a3;
 }
 
+#root {
+    padding-top: 40px;
+    background-color: #1a1a1a;
+}
+
 body, html {
   margin: 0;
   padding: 0;
