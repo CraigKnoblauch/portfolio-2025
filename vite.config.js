@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react'
 import glsl from 'vite-plugin-glsl'
 import path from 'path'
 import fs from 'fs'
+import mdx from '@mdx-js/rollup'
 
 function removeAssets() {
     return {
@@ -22,7 +23,9 @@ function removeAssets() {
 }
 
 export default defineConfig({
-    plugins: [removeAssets(), react(), glsl(), tailwindcss()],
+    // We can’t use import at the top level because vite.config.js is CommonJS, not ESM, and @mdx-js/rollup is ESM only.
+    // https://trean.page/posts/2023-08-30-using-mdx-with-vite/
+    plugins: [removeAssets(), react(), glsl(), tailwindcss(), mdx()],
 //    root: 'src/',
 //    publicDir: '../public',
 //    base: './',
