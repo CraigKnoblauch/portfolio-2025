@@ -4,7 +4,9 @@ function Markdown() {
 
   return (
     <>
-      <Sample />
+		<div className="prose">
+			<Sample />
+		</div>
     </>
   )
 }
