@@ -1,15 +1,26 @@
 import React, { Suspense } from 'react'
 import { useParams } from 'react-router-dom'
 
-const Markdown = ({ filename }) => {
+const Markdown = ({ posts }) => {
     
     let { slug } = useParams();
     const Content = React.lazy(() => import(`./mdx/${slug}.mdx`));
+
+    const metadata = posts.find(post => post.slug === slug);
 
     return (
         <>
             <div className="flex flex-col items-center min-h-screen w-full"> 
                 <div className="justify-left w-8/10 lg:w-1/2">
+                <h1 className="text-primary-white merriweather-bold text-lg py-1">{metadata.title}</h1>
+                <h2 className="text-secondary-gray merriweather-regular text-sm py-1">{
+                    new Date(metadata.date).toLocaleDateString('en-US', {
+                        month: 'long',
+                        day: 'numeric',
+                        year: 'numeric'
+                    })
+                }
+                </h2>
                     <div className="prose merriweather-regular">
                         <Suspense fallback={<h1>Loading...</h1>}>
                             <Content />

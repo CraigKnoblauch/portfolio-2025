@@ -1,8 +1,7 @@
-import { POSTS } from "src/posts.js"
 import { PostsToc } from "src/PostsToc.jsx"
 import { Link } from 'react-router-dom'
 
-function Explorations() {
+const Explorations = ({ posts }) => {
 
   return (
     <>
@@ -13,7 +12,7 @@ function Explorations() {
                 <Link to="/" className="text-secondary-gray merriweather-regular-italic underline text-sm">home</Link>
                 <h1 className="text-primary-white merriweather-bold text-lg pt-4">Explorations</h1>
 
-                <PostsToc posts={POSTS} />
+                <PostsToc posts={posts} />
 
             </div>
         </div>

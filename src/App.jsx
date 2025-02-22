@@ -1,8 +1,7 @@
 // import './App.css'
-import { POSTS } from 'src/posts.js'
 import { Link } from 'react-router-dom'
 
-function App() {
+const App = ({ posts }) => {
 
   return (
     <>
@@ -21,7 +20,7 @@ function App() {
 					{/* Title */}
 					<div className="text-secondary-gray">Explorations</div>
 					{/* Container for a post */}
-                    {POSTS.filter(post => post.featured).map((post, index) => (
+                    {posts.filter(post => post.featured).map((post, index) => (
                         <div key={index} className="flex flex-col space-y-2 pt-6">
                             <Link to={`explorations/${post.slug}`} className="text-primary-white underline">{post.title}</Link>
                             <p className="text-secondary-gray">{post.description}</p>
