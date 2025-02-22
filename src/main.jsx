@@ -7,8 +7,8 @@ import Markdown from './Markdown.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* <App /> */}
-    {/* <Explorations /> */}
+    <App />
+    <Explorations />
     <Markdown />
   </StrictMode>,
 )

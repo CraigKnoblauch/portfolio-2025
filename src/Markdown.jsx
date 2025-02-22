@@ -4,7 +4,7 @@ function Markdown() {
 
   return (
     <>
-		<div className="prose">
+		<div className="prose merriweather-regular">
 			<Sample />
 		</div>
     </>
