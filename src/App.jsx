@@ -1,4 +1,5 @@
 // import './App.css'
+import { POSTS } from 'src/posts.js'
 
 function App() {
 
@@ -19,18 +20,12 @@ function App() {
 					{/* Title */}
 					<div className="text-secondary-gray">Explorations</div>
 					{/* Container for a post */}
-					<div className="flex flex-col space-y-2 pt-6">
-						<a href="www.youtube.com" className="text-primary-white underline">Rocket Launch</a>
-						<p className="text-secondary-gray">A ThreeJS animation celebrating my cubesat launch in 2019</p>
-					</div>
-					<div className="flex flex-col space-y-2 pt-6">
-						<a href="www.youtube.com" className="text-primary-white underline">Camera Animations</a>
-						<p className="text-secondary-gray">A bunch of approaches to camera animations in ThreeJS</p>
-					</div>
-					<div className="flex flex-col space-y-2 pt-6">
-						<a href="www.youtube.com" className="text-primary-white underline">Lessons from a 3D portfolio</a>
-						<p className="text-secondary-gray">Everything I learned trying to build an interactive 3D portfolio on the web</p>
-					</div>
+                    {POSTS.filter(post => post.featured).map((post, index) => (
+                        <div key={index} className="flex flex-col space-y-2 pt-6">
+                            <a href={post.link} className="text-primary-white underline">{post.title}</a>
+                            <p className="text-secondary-gray">{post.description}</p>
+                        </div>
+                    ))}
 					<div className="flex flex-col space-y-2 pt-10"> {/* NOTE higher padding on this element for division */}
 						<a href="www.youtube.com" className="text-primary-white underline">Everything</a>
 					</div>
@@ -42,9 +37,9 @@ function App() {
 					<p className="text-primary-white">I’ve got experience across a few different industries. A thing about how I’m good at solving problems and always trying to be a better engineer</p>
 					{/* Small flexbox to hold outbound arrow and link */}
 					<div className="flex flex-row text-primary-white">
-						<a href="youtube.com" className="underline">resume</a>
+						<a href="https://drive.google.com/file/d/1q3qX4lHtOwgXbwCQicCOyJ9uc8KG6TYD/view?usp=drivesdk" className="underline">resume</a>
 						<svg height="20px" width="20px">
-							<path d="M7 17L17 7M17 7H8M17 7V16" stroke="#a3a3a3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+							<path d="M7 17L17 7M17 7H8M17 7V16" stroke="#a3a3a3" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
 						</svg>
 					</div>
 				</div>
