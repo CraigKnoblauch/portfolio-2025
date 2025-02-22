@@ -1,5 +1,6 @@
 // import './App.css'
 import { POSTS } from 'src/posts.js'
+import { Link } from 'react-router-dom'
 
 function App() {
 
@@ -27,7 +28,7 @@ function App() {
                         </div>
                     ))}
 					<div className="flex flex-col space-y-2 pt-10"> {/* NOTE higher padding on this element for division */}
-						<a href="www.youtube.com" className="text-primary-white underline">Everything</a>
+						<Link to="/explorations" className="text-primary-white underline">Everything</Link>
 					</div>
 				</div>
                 {/* Experience section. Use pattern here to make a component later on */}
