@@ -23,7 +23,7 @@ function App() {
 					{/* Container for a post */}
                     {POSTS.filter(post => post.featured).map((post, index) => (
                         <div key={index} className="flex flex-col space-y-2 pt-6">
-                            <a href={post.link} className="text-primary-white underline">{post.title}</a>
+                            <Link to={`explorations/${post.slug}`} className="text-primary-white underline">{post.title}</Link>
                             <p className="text-secondary-gray">{post.description}</p>
                         </div>
                     ))}

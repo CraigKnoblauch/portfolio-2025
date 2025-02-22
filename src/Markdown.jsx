@@ -1,8 +1,10 @@
-import React, { Suspense } from 'react';
+import React, { Suspense } from 'react'
+import { useParams } from 'react-router-dom'
 
 const Markdown = ({ filename }) => {
     
-    const Content = React.lazy(() => import(`./mdx/${filename}`));
+    let { slug } = useParams();
+    const Content = React.lazy(() => import(`./mdx/${slug}.mdx`));
 
     return (
         <>

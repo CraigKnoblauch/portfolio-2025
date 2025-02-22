@@ -12,7 +12,7 @@ createRoot(document.getElementById('root')).render(
         <Routes>
             <Route exact path="/" element={<App />} />
             <Route path="/explorations" element={<Explorations />} />
-            <Route path="/markdown" element={<Markdown filename='rocket-launch.mdx' />} />
+            <Route path="/explorations/:slug" element={<Markdown />} />
         </Routes>
     </Router>
   </StrictMode>,
