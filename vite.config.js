@@ -46,13 +46,14 @@ export default defineConfig({
             enabled: true,
             name: 'chromium', // browser name is required
             headless: true, // overridden in CLI
-            viewport: { width: 800, height: 600 },
+            viewport: { width: 800, height: 800 },
             providerOptions: {}
         }
     },
     resolve: {
         alias: {
-            src: ('/src/')
+            src: ('/src/'),
+			tests: ('/tests/')
         }
     },
     allowOnly: true,

@@ -11,3 +11,30 @@ h2: `text-secondary-gray merriweather-regular text-sm py-4`
 p: `text-primary-white merriweather-regular text-sm py-4`
 
 basically just know that most text that is content is text-sm
+
+# TODO
+Add a link to each posts page to go back home
+Consolidate formatting, styles, etc. under prose
+
+# Test cases
+
+## Home
+A screenshot should match a test screenshot on three display types
+Should have links for all of the featured posts
+Clicking a each link to the post will render the appropriate markdown component
+Should have a link 'Everything' that will render the Explorations page
+Should have a link 'resume' that links out to the google drive link
+Should have a link to linkedin, github, and mail
+
+## Explorations
+A screenshot should match a test screenshot on three display types
+should have a link to go home
+link to go home should return Home component
+should have as many hr components as there are years
+should have elements whose contents match the titles of the posts
+clicking one of the elements with the title should render the corresponding Markdown component
+
+## Markdown
+Screenshot should match test screenshot
+Should have a header with the appropriate title
+Should have a sub header with the appropriate date format

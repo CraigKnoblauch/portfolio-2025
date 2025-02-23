@@ -1,7 +1,6 @@
-// import './App.css'
 import { Link } from 'react-router-dom'
 
-const App = ({ posts }) => {
+const Home = ({ posts }) => {
 
   return (
     <>
@@ -16,12 +15,12 @@ const App = ({ posts }) => {
                     <p>This is a little about what I've done</p>
                 </div>
                 {/* Explorations section. Use pattern here to make a component later on */}
-				<div className="merriweather-regular text-sm py-4">
+				<div id="explorations" className="merriweather-regular text-sm py-4">
 					{/* Title */}
 					<div className="text-secondary-gray">Explorations</div>
 					{/* Container for a post */}
                     {posts.filter(post => post.featured).map((post, index) => (
-                        <div key={index} className="flex flex-col space-y-2 pt-6">
+                        <div key={index} className="flex flex-col space-y-2 pt-6" data-testid="featured-post">
                             <Link to={`explorations/${post.slug}`} className="text-primary-white underline">{post.title}</Link>
                             <p className="text-secondary-gray">{post.description}</p>
                         </div>
@@ -48,9 +47,9 @@ const App = ({ posts }) => {
 					{/* Title */}
 					<div className="text-secondary-gray">Connect</div>
 					<div className="flex flex-row space-x-10 text-secondary-gray">
-						<p>LinkedIn</p>
-						<p>Github</p>
-						<p>Mail</p>
+						<a href="https://www.linkedin.com/in/craig-knoblauch-b88563124">LinkedIn</a>
+						<a href="https://github.com/CraigKnoblauch">Github</a>
+						<a href="mailto:todo@example.com">Mail</a>
 					</div>
 				</div>
             </div>
@@ -59,4 +58,4 @@ const App = ({ posts }) => {
   )
 }
 
-export default App
+export default Home
