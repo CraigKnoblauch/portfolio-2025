@@ -1,5 +1,5 @@
 /**
- * [ ] HOLD until css is in screenshots A screenshot should match a test screenshot on three display types
+ * [x] HOLD until css is in screenshots A screenshot should match a test screenshot on three display types
  * [x] Should have links for all of the featured posts
  * [ ] Clicking a each link to the post will render the appropriate markdown component
  * [x] Should have a link 'Everything' that will render the Explorations page
@@ -16,6 +16,18 @@ import { POSTS } from 'tests/test-posts.js'
 
 // NOTE Reference this to test routes: https://stackoverflow.com/questions/74399490/how-to-test-routing-logic-with-react-router-v6-and-testing-library
 describe('Home page', () => {
+    it.skip('screenshot should match expected', async () => {
+        render(
+        <MemoryRouter initialEntries={['/']}>
+            <Home posts={POSTS} />
+        </MemoryRouter>
+        )
+
+        const screenshot = await page.screenshot()
+        console.log(screenshot);
+        expect(screenshot).toMatchFileSnapshot('screenshots/expectedHome.png');
+    })
+
     it('should have links to all featured posts', async () => {
         render(
         <MemoryRouter initialEntries={['/']}>

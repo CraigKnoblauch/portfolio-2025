@@ -7,12 +7,24 @@
 import { expect, it, describe, test } from 'vitest'
 import { render } from 'vitest-browser-react'
 import { screen } from '@testing-library/react'
+import { userEvent, page } from '@vitest/browser/context'
 import { MemoryRouter } from 'react-router-dom'
 import { POSTS } from 'tests/test-posts.js'
 import Explorations from 'src/Explorations'
 
 // NOTE Reference this to test routes: https://stackoverflow.com/questions/74399490/how-to-test-routing-logic-with-react-router-v6-and-testing-library
-describe('Home page', () => {
+describe('Explorations', () => {
+    it.skip('screenshot should match expected', async () => {
+        render(
+        <MemoryRouter initialEntries={['/']}>
+            <Explorations posts={POSTS} />
+        </MemoryRouter>
+        )
+
+        const screenshot = await page.screenshot();
+        expect(screenshot).toMatchFileSnapshot('screenshots/expectedExplorations.png');
+    })
+
     it('should have a link to go home', async () => {
         render(
         <MemoryRouter initialEntries={['/']}>

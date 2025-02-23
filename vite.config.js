@@ -48,7 +48,8 @@ export default defineConfig({
             headless: true, // overridden in CLI
             viewport: { width: 800, height: 800 },
             providerOptions: {}
-        }
+        },
+        setupFiles: 'tests/setup.js'
     },
     resolve: {
         alias: {
