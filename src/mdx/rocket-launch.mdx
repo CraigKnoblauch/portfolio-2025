@@ -1,10 +1,15 @@
+import { useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
-import Injection from "src/Injection.jsx"
+import { OrbitControls } from '@react-three/drei'
+import { RocketLaunchModel } from 'src/components/RocketLaunchModel.jsx'
 
 Here's some content as an example
 
 <Canvas>
-    <Injection />
+    <ambientLight />
+    <perspectiveCamera position={[0, 0, 5]} />
+    <OrbitControls />
+    <RocketLaunchModel />
 </Canvas>
 
 That's all for now. I'll work on the other stuff in a bit
