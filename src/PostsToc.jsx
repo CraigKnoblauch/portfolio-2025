@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export const PostsToc = ({ posts }) => {
 
     const postsByYear = posts.reduce((acc, post) => {
@@ -37,8 +39,8 @@ export const PostsToc = ({ posts }) => {
                     <div className="text-secondary-gray">{year}</div>
                     <div className="flex flex-col min-w-1/2 max-w-3/4 space-y-2">
                         {postsByYear[year].map((post, postIndex) => {
-                            return <div className="flex justify-between">
-                                <a href={post.link} className="text-primary-white">{post.title}</a>
+                            return <div className="flex justify-between" data-testid="post">
+                                <Link to={`/explorations/${post.slug}`} className="text-primary-white">{post.title}</Link>
                                 <p className="text-secondary-gray">{
                                     new Date(post.date).toLocaleDateString('en-US', { 
                                         month: 'short', 

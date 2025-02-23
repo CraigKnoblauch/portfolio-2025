@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 
 const Markdown = ({ posts }) => {
     
@@ -12,7 +12,8 @@ const Markdown = ({ posts }) => {
         <>
             <div className="flex flex-col items-center min-h-screen w-full"> 
                 <div className="justify-left w-8/10 lg:w-1/2">
-                <h1 className="text-primary-white merriweather-bold text-lg py-1">{metadata.title}</h1>
+                <Link to="/explorations" className="text-secondary-gray merriweather-regular-italic underline text-sm">explorations</Link>
+                <h1 className="text-primary-white merriweather-bold text-lg pt-10 py-1">{metadata.title}</h1>
                 <h2 className="text-secondary-gray merriweather-regular text-sm py-1">{
                     new Date(metadata.date).toLocaleDateString('en-US', {
                         month: 'long',
@@ -21,7 +22,7 @@ const Markdown = ({ posts }) => {
                     })
                 }
                 </h2>
-                    <div className="prose merriweather-regular">
+                    <div className="prose merriweather-regular pt-10">
                         <Suspense fallback={<h1>Loading...</h1>}>
                             <Content />
                         </Suspense>
