@@ -12,10 +12,21 @@ import * as THREE from 'three'
 export const RocketLaunchModel = () => {
   const { nodes, materials } = useGLTF('../models/rocket-launch.glb')
 
-  const platformGray = new THREE.MeshMatcapMaterial({matcap: useLoader(THREE.TextureLoader, '../matcaps/platform-gray.png')})
-  const rockGray = new THREE.MeshMatcapMaterial({matcap: useLoader(THREE.TextureLoader, '../matcaps/rock-gray.png')})
-  const silver = new THREE.MeshMatcapMaterial({matcap: useLoader(THREE.TextureLoader, '../matcaps/silver.png')})
-  const vanguardRed = new THREE.MeshMatcapMaterial({matcap: useLoader(THREE.TextureLoader, '../matcaps/vanguard-red.png')})
+  const platformMatcapTexture = useLoader(THREE.TextureLoader, '../matcaps/platform-gray.png')
+  platformMatcapTexture.colorSpace = THREE.SRGBColorSpace
+  const platformGray = new THREE.MeshMatcapMaterial({matcap: platformMatcapTexture})
+
+  const rockMatcapTexture = useLoader(THREE.TextureLoader, '../matcaps/rock-gray.png')
+  rockMatcapTexture.colorSpace = THREE.SRGBColorSpace
+  const rockGray = new THREE.MeshMatcapMaterial({matcap: rockMatcapTexture})
+
+  const silverMatcapTexture = useLoader(THREE.TextureLoader, '../matcaps/silver.png')
+  silverMatcapTexture.colorSpace = THREE.SRGBColorSpace
+  const silver = new THREE.MeshMatcapMaterial({matcap: silverMatcapTexture})
+  
+  const vanguardRedMatcapTexture = useLoader(THREE.TextureLoader, '../matcaps/vanguard-red.png')
+  vanguardRedMatcapTexture.colorSpace = THREE.SRGBColorSpace
+  const vanguardRed = new THREE.MeshMatcapMaterial({matcap: vanguardRedMatcapTexture})
   
   return (
     <group dispose={null}>
