@@ -9,7 +9,7 @@ import { useLoader } from '@react-three/fiber'
 import * as THREE from 'three'
 
 // NOTE I have to use .. instead of . for public location because the route is /explorations not just /
-export const RocketLaunchModel = () => {
+export const RocketLaunch = () => {
   const { nodes, materials } = useGLTF('../models/rocket-launch.glb')
 
   const platformMatcapTexture = useLoader(THREE.TextureLoader, '../matcaps/platform-gray.png')
