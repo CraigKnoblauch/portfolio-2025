@@ -7,22 +7,7 @@ import React, { useRef } from 'react'
 import { useGLTF, shaderMaterial, useTexture } from '@react-three/drei'
 import { useFrame, useLoader, extend } from '@react-three/fiber'
 import * as THREE from 'three'
-
-import yellowFlamesVertexShader from 'src/shaders/rocket-flames/yellow/vertex.glsl'
-import yellowFlamesFragmentShader from 'src/shaders/rocket-flames/yellow/fragment.glsl'
-
-const YellowFlamesMaterial = shaderMaterial(
-    {
-        uTime: 0,
-        uPerlinTexture: new THREE.Uniform(null),
-        uJumpyPerlinTexture: new THREE.Uniform(null),
-        uJumpyPerlinTextureVertical: 0,
-        uHotFlameColor: new THREE.Color('#fabd07'),
-        uCoolFlameColor: new THREE.Color('#077cfa')
-    },
-    yellowFlamesVertexShader,
-    yellowFlamesFragmentShader
-)
+import { YellowFlamesMaterial } from 'src/shaders/rocket-flames/YellowFlamesMaterial'
 
 extend({ YellowFlamesMaterial })
 
