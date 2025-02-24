@@ -83,37 +83,48 @@ export const RocketLaunch = () => {
   const yellowFlames1Ref = useRef(new THREE.Object3D())
   const yellowFlames2Ref = useRef(new THREE.Object3D())
 
-  const rocketMixer = new THREE.AnimationMixer(rocketRef.current)
-  const cradleMixer = new THREE.AnimationMixer(cradleRef.current)
-  const buttonMixer = new THREE.AnimationMixer(buttonRef.current)
-  const nozzle1Mixer = new THREE.AnimationMixer(nozzle1Ref.current)
-  const nozzle2Mixer = new THREE.AnimationMixer(nozzle2Ref.current)
-  const yellowFlames1Mixer = new THREE.AnimationMixer(yellowFlames1Ref.current)
-  const yellowFlames2Mixer = new THREE.AnimationMixer(yellowFlames2Ref.current)
-
-  const rocketAction = rocketMixer.clipAction(animations.find(animation => animation.name === 'rocketAction')).setLoop(THREE.LoopOnce, 0)
-  rocketAction.clampWhenFinished = true 
-  const cradleAction = cradleMixer.clipAction(animations.find(animation => animation.name === 'rocket cradleAction')).setLoop(THREE.LoopOnce, 0)
-  cradleAction.clampWhenFinished = true 
-  const buttonAction = buttonMixer.clipAction(animations.find(animation => animation.name === 'launch buttonAction')).setLoop(THREE.LoopOnce, 0)
-  buttonAction.clampWhenFinished = true 
-  const nozzle1Action = nozzle1Mixer.clipAction(animations.find(animation => animation.name === 'rocket nozzle 1Action')).setLoop(THREE.LoopOnce, 0)
-  nozzle1Action.clampWhenFinished = true
-  const nozzle2Action = nozzle2Mixer.clipAction(animations.find(animation => animation.name === 'rocket nozzle 2Action')).setLoop(THREE.LoopOnce, 0)
-  nozzle2Action.clampWhenFinished = true
-  const yellowFlames1Action = yellowFlames1Mixer.clipAction(animations.find(animation => animation.name === 'rocket yellow flames 1Action')).setLoop(THREE.LoopOnce, 0)
-  yellowFlames1Action.clampWhenFinished = true
-  const yellowFlames2Action = yellowFlames2Mixer.clipAction(animations.find(animation => animation.name === 'rocket yellow flames 2Action')).setLoop(THREE.LoopOnce, 0)
-  yellowFlames2Action.clampWhenFinished = true
+  let rocketMixer = null
+  let cradleMixer = null
+  let buttonMixer = null
+  let nozzle1Mixer = null
+  let nozzle2Mixer = null
+  let yellowFlames1Mixer = null
+  let yellowFlames2Mixer = null
 
   function startLaunch() {
-    rocketAction.play()
-    cradleAction.play()
-    buttonAction.play()
-    nozzle1Action.play()
-    nozzle2Action.play()
-    yellowFlames1Action.play()
-    yellowFlames2Action.play()
+    // HACK Set the mixers with the actual value from the DOM
+    if (rocketRef.current.name === 'rocket') {
+        rocketMixer = new THREE.AnimationMixer(rocketRef.current)
+        cradleMixer = new THREE.AnimationMixer(cradleRef.current)
+        buttonMixer = new THREE.AnimationMixer(buttonRef.current)
+        nozzle1Mixer = new THREE.AnimationMixer(nozzle1Ref.current)
+        nozzle2Mixer = new THREE.AnimationMixer(nozzle2Ref.current)
+        yellowFlames1Mixer = new THREE.AnimationMixer(yellowFlames1Ref.current)
+        yellowFlames2Mixer = new THREE.AnimationMixer(yellowFlames2Ref.current)
+
+        const rocketAction = rocketMixer.clipAction(animations.find(animation => animation.name === 'rocketAction')).setLoop(THREE.LoopOnce, 0)
+        rocketAction.clampWhenFinished = true 
+        const cradleAction = cradleMixer.clipAction(animations.find(animation => animation.name === 'rocket cradleAction')).setLoop(THREE.LoopOnce, 0)
+        cradleAction.clampWhenFinished = true 
+        const buttonAction = buttonMixer.clipAction(animations.find(animation => animation.name === 'launch buttonAction')).setLoop(THREE.LoopOnce, 0)
+        buttonAction.clampWhenFinished = true 
+        const nozzle1Action = nozzle1Mixer.clipAction(animations.find(animation => animation.name === 'rocket nozzle 1Action')).setLoop(THREE.LoopOnce, 0)
+        nozzle1Action.clampWhenFinished = true
+        const nozzle2Action = nozzle2Mixer.clipAction(animations.find(animation => animation.name === 'rocket nozzle 2Action')).setLoop(THREE.LoopOnce, 0)
+        nozzle2Action.clampWhenFinished = true
+        const yellowFlames1Action = yellowFlames1Mixer.clipAction(animations.find(animation => animation.name === 'rocket yellow flames 1Action')).setLoop(THREE.LoopOnce, 0)
+        yellowFlames1Action.clampWhenFinished = true
+        const yellowFlames2Action = yellowFlames2Mixer.clipAction(animations.find(animation => animation.name === 'rocket yellow flames 2Action')).setLoop(THREE.LoopOnce, 0)
+        yellowFlames2Action.clampWhenFinished = true
+        
+        rocketAction.play()
+        cradleAction.play()
+        buttonAction.play()
+        nozzle1Action.play()
+        nozzle2Action.play()
+        yellowFlames1Action.play()
+        yellowFlames2Action.play()
+    }
   }
 
   useFrame((state, delta) => {
@@ -123,13 +134,13 @@ export const RocketLaunch = () => {
     // ******************************************
 
     // ****************** LAUNCH ****************
-    rocketMixer.update(delta)
-    cradleMixer.update(delta)
-    buttonMixer.update(delta)
-    nozzle1Mixer.update(delta)
-    nozzle2Mixer.update(delta)
-    yellowFlames1Mixer.update(delta)
-    yellowFlames2Mixer.update(delta)
+    rocketMixer?.update(delta)
+    cradleMixer?.update(delta)
+    buttonMixer?.update(delta)
+    nozzle1Mixer?.update(delta)
+    nozzle2Mixer?.update(delta)
+    yellowFlames1Mixer?.update(delta)
+    yellowFlames2Mixer?.update(delta)
     // ******************************************
   })
   
