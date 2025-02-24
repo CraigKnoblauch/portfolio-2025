@@ -28,13 +28,17 @@ extend({ YellowFlamesMaterial })
 
 // NOTE I have to use .. instead of . for public location because the route is /explorations not just /
 export const RocketLaunch = () => {
-  const { nodes, materials } = useGLTF('../models/rocket-launch.glb')
+  const { nodes, materials, animations } = useGLTF('../models/rocket-launch.glb')
 
   /**
    * Materials
    */
 
   // **************** MATCAPS ****************
+  const groundMatcapTexture = useLoader(THREE.TextureLoader, '../matcaps/ground.png')
+  groundMatcapTexture.colorSpace = THREE.SRGBColorSpace
+  const groundSepia = new THREE.MeshMatcapMaterial({matcap: groundMatcapTexture})
+
   const platformMatcapTexture = useLoader(THREE.TextureLoader, '../matcaps/platform-gray.png')
   platformMatcapTexture.colorSpace = THREE.SRGBColorSpace
   const platformGray = new THREE.MeshMatcapMaterial({matcap: platformMatcapTexture})
@@ -71,23 +75,75 @@ export const RocketLaunch = () => {
   /**
    * Animation
    */
+  const rocketRef = useRef(new THREE.Object3D())
+  const cradleRef = useRef(new THREE.Object3D())
+  const buttonRef = useRef(new THREE.Object3D())
+  const nozzle1Ref = useRef(new THREE.Object3D())
+  const nozzle2Ref = useRef(new THREE.Object3D())
+  const yellowFlames1Ref = useRef(new THREE.Object3D())
+  const yellowFlames2Ref = useRef(new THREE.Object3D())
+
+  const rocketMixer = new THREE.AnimationMixer(rocketRef.current)
+  const cradleMixer = new THREE.AnimationMixer(cradleRef.current)
+  const buttonMixer = new THREE.AnimationMixer(buttonRef.current)
+  const nozzle1Mixer = new THREE.AnimationMixer(nozzle1Ref.current)
+  const nozzle2Mixer = new THREE.AnimationMixer(nozzle2Ref.current)
+  const yellowFlames1Mixer = new THREE.AnimationMixer(yellowFlames1Ref.current)
+  const yellowFlames2Mixer = new THREE.AnimationMixer(yellowFlames2Ref.current)
+
+  const rocketAction = rocketMixer.clipAction(animations.find(animation => animation.name === 'rocketAction')).setLoop(THREE.LoopOnce, 0)
+  rocketAction.clampWhenFinished = true 
+  const cradleAction = cradleMixer.clipAction(animations.find(animation => animation.name === 'rocket cradleAction')).setLoop(THREE.LoopOnce, 0)
+  cradleAction.clampWhenFinished = true 
+  const buttonAction = buttonMixer.clipAction(animations.find(animation => animation.name === 'launch buttonAction')).setLoop(THREE.LoopOnce, 0)
+  buttonAction.clampWhenFinished = true 
+  const nozzle1Action = nozzle1Mixer.clipAction(animations.find(animation => animation.name === 'rocket nozzle 1Action')).setLoop(THREE.LoopOnce, 0)
+  nozzle1Action.clampWhenFinished = true
+  const nozzle2Action = nozzle2Mixer.clipAction(animations.find(animation => animation.name === 'rocket nozzle 2Action')).setLoop(THREE.LoopOnce, 0)
+  nozzle2Action.clampWhenFinished = true
+  const yellowFlames1Action = yellowFlames1Mixer.clipAction(animations.find(animation => animation.name === 'rocket yellow flames 1Action')).setLoop(THREE.LoopOnce, 0)
+  yellowFlames1Action.clampWhenFinished = true
+  const yellowFlames2Action = yellowFlames2Mixer.clipAction(animations.find(animation => animation.name === 'rocket yellow flames 2Action')).setLoop(THREE.LoopOnce, 0)
+  yellowFlames2Action.clampWhenFinished = true
+
+  function startLaunch() {
+    rocketAction.play()
+    cradleAction.play()
+    buttonAction.play()
+    nozzle1Action.play()
+    nozzle2Action.play()
+    yellowFlames1Action.play()
+    yellowFlames2Action.play()
+  }
+
   useFrame((state, delta) => {
     // ***************** FLAMES *****************
     yellowFlamesMaterialRef1.current.uTime += delta
     yellowFlamesMaterialRef2.current.uTime += delta
-    // *****************************************
+    // ******************************************
+
+    // ****************** LAUNCH ****************
+    rocketMixer.update(delta)
+    cradleMixer.update(delta)
+    buttonMixer.update(delta)
+    nozzle1Mixer.update(delta)
+    nozzle2Mixer.update(delta)
+    yellowFlames1Mixer.update(delta)
+    yellowFlames2Mixer.update(delta)
+    // ******************************************
   })
   
   return (
     <group dispose={null}>
+      <primitive object={nodes.ground} material={groundSepia} />
       <primitive object={nodes.rocket_platform} material={platformGray} />
-      <primitive object={nodes.rocket_cradle} material={rockGray} />
-      <primitive object={nodes.rocket} material={new THREE.MeshNormalMaterial()} />
-      <primitive object={nodes.rocket_nozzle_1} material={silver} />
-      <primitive object={nodes.rocket_nozzle_2} material={silver} />
+      <primitive object={nodes.rocket_cradle} material={rockGray} ref={cradleRef} />
+      <primitive object={nodes.rocket} material={new THREE.MeshNormalMaterial()} ref={rocketRef} />
+      <primitive object={nodes.rocket_nozzle_1} material={silver} ref={nozzle1Ref} />
+      <primitive object={nodes.rocket_nozzle_2} material={silver} ref={nozzle2Ref} />
       <primitive object={nodes.launch_button_platform} material={platformGray} />
-      <primitive object={nodes.launch_button} material={vanguardRed} />
-      <primitive object={nodes.rocket_yellow_flames_1}>
+      <primitive object={nodes.launch_button} material={vanguardRed} ref={buttonRef} onClick={startLaunch} />
+      <primitive object={nodes.rocket_yellow_flames_1} ref={yellowFlames1Ref} >
         <yellowFlamesMaterial ref={yellowFlamesMaterialRef1} 
                               uPerlinTexture={perlinTexture} 
                               uJumpyPerlinTexture={jumpyPerlinTexture}
@@ -95,7 +151,7 @@ export const RocketLaunch = () => {
                               transparent 
         />
       </primitive>
-      <primitive object={nodes.rocket_yellow_flames_2}>
+      <primitive object={nodes.rocket_yellow_flames_2} ref={yellowFlames2Ref} >
         <yellowFlamesMaterial ref={yellowFlamesMaterialRef2} 
                               uPerlinTexture={perlinTexture} 
                               uJumpyPerlinTexture={jumpyPerlinTexture}
