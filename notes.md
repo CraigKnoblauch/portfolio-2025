@@ -38,3 +38,4 @@ clicking one of the elements with the title should render the corresponding Mark
 Screenshot should match test screenshot
 Should have a header with the appropriate title
 Should have a sub header with the appropriate date format
+Noticed an edge case where providing the date '2020-01-01' resolved to 'December 31, 2019'. Look in the sandbox file

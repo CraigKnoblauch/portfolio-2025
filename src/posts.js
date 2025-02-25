@@ -28,5 +28,12 @@ export const POSTS = [
         date: "2024-05-27",
         slug: "rocket-launch",
         featured: true
+    },
+    {
+        title: "Sandbox",
+        description: "Sandbox",
+        date: "2020-01-01",
+        slug: "sandbox",
+        featured: false
     }
 ]

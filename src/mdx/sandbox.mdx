@@ -1,0 +1,12 @@
+import { Exhaust } from 'src/components/Exhaust'
+import { Canvas } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
+
+<div className="h-150">
+<Canvas>
+    <ambientLight />
+    <perspectiveCamera position={[0, 0, 5]} />
+    <OrbitControls />
+    <Exhaust />
+</Canvas>
+</div>
