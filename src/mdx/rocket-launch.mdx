@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import { RocketLaunch } from 'src/components/RocketLaunch.jsx'
 
-Here's some content as an example
+In November 2019, the NG-12 ISS resupply launch carried my team's satellite to space! It was a transformative experience. Press the big red button on the window below!
 
 <div className="h-150">
 <Canvas>
@@ -14,12 +14,52 @@ Here's some content as an example
 </Canvas>
 </div>
 
-That's all for now. I'll work on the other stuff in a bit
+# How it works 
+The entire scene is made possible with ThreeJS. The models, animations, and most of the materials were created in Blender. It was a fun exercise to create this. I learned a lot about keeping models simple, structuring components for reuse, utilizing the capability of Blender.
 
-This is **bold**
+## Animations
+Animations in ThreeJS are straightforward. The render loop is accessible with the `useFrame` hook. As long as you associate a ref with the entities in the 3JS scene you want to animate, all you have to do is update the desired property during the render loop. The code below shows you how to use this method to rotate a cube.
 
-This is _italic_ and this is bold **_italic_**
+```jsx
+import { useRef } from 'react';
+import { useFrame } from '@react-three/fiber';
 
+export default function RotatingCube() {
+    const ref = useRef();
+    useFrame(() => {
+        if (ref.current) {
+            ref.current.rotation.y += 0.01;
+            ref.current.rotation.x += 0.01;
+        }
+    })
+
+    return (
+        <>
+            <ambientLight />
+            <perspectiveCamera position={[0, 0, 5]} />
+            <mesh ref={ref} rotation={[0, 0, 0]}>
+                <boxGeometry args={[1, 1, 1]} />
+                <meshNormalMaterial/>
+            </mesh>
+        </>
+    );
+}
 ```
-this is a code block
-```
+
+This is the most common approach. But what if you have a bunch of things you want to animate? What if you want to have some mildly complex behaviors like a rocket that accelerates upward? That's gonna require a lot of code. If you're building test cases, that's going to require a bunch of tests. Yes maybe you can tuck it away in isolated components, but what if you want to change it in the future? What if you want to add a slight spin to the rocket or add an entirely new animation? The code balloons, and it becomes harder and harder to change, understand, and maintain. 
+
+### Blender defined animations
+While I was working on my [custom pathing approach for camera movement](camera-animations.mdx), I realized that I could probably define my animations in Blender, export them with the rocket launch gltf file, and play them in the scene. That's exactly what I've done here. I keyframed the positions of the rocket, cradle, and launch button for the beginning and the end of the animation. Blender provides a curve editor, which allows you to play with the animation transitions in a much more intuitive way compared to changing values in code. 
+
+Once the animation is exported from Blender, I can use the [built-in animation system ThreeJS provides](https://threejs.org/docs/#manual/en/introduction/Animation-system). Now, playing the animation is as simple as `action.play()`. Resetting the animation is as simple as `action.reset()`. No more complex state tracking. And the management of the animation is passed off to the ThreeJS library, which means much less for me to test. 
+
+TODO pics for making animation in blender, code
+
+### Procedural exhaust
+The exhaust was interesting to implement. Originally, I was thinking of implementing something close to this
+
+TODO pic of smoke made back in July 23. 
+
+The problem? Exhaust smoke of that kind would most likely have to be implemneted as a GLSL shader. Shaders are fun for sure, but one of that complexity is a bit too much for me at the moment. I also couldn't find a method to transpile a blender shader into a GLSL shader compatible with WebGL. This doesn't mean that a method doesn't exist, but I couldn't find one at the time.
+
+I decided to play around with a collection of meshes that would sort of emulate cartoon smoke.
