@@ -39,3 +39,10 @@ Screenshot should match test screenshot
 Should have a header with the appropriate title
 Should have a sub header with the appropriate date format
 Noticed an edge case where providing the date '2020-01-01' resolved to 'December 31, 2019'. Look in the sandbox file
+
+
+# Bugs
+Format looks weird in a few places, content overflows or scales weird
+Code blocks don't have syntax highlighting
+Need a gap at the bottom of the page.
+

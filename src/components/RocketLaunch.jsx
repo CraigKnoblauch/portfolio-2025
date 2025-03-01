@@ -5,9 +5,10 @@ Command: npx gltfjsx@6.2.16 rocket-launch.glb
 
 import React, { useRef } from 'react'
 import { useGLTF, shaderMaterial, useTexture } from '@react-three/drei'
-import { useFrame, useLoader, extend } from '@react-three/fiber'
+import { useFrame, useLoader, extend, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 import { YellowFlamesMaterial } from 'src/shaders/rocket-flames/YellowFlamesMaterial'
+import { Exhaust } from 'src/components/Exhaust'
 
 extend({ YellowFlamesMaterial })
 
@@ -18,6 +19,10 @@ export const RocketLaunch = () => {
   /**
    * Materials
    */
+  // Rocket body
+  const bodyTexture = useTexture('/textures/rocket-uv-map.jpg')
+  bodyTexture.colorSpace = THREE.SRGBColorSpace
+  bodyTexture.flipY = false
 
   // **************** MATCAPS ****************
   const groundMatcapTexture = useLoader(THREE.TextureLoader, '../matcaps/ground.png')
@@ -76,6 +81,10 @@ export const RocketLaunch = () => {
   let yellowFlames1Mixer = null
   let yellowFlames2Mixer = null
 
+  // **************** EXHAUT ******************************
+  const exhaustRef = useRef({isVisible: false, terminate: false})
+  const emitterRef = useRef()
+
   function startLaunch() {
     // HACK Set the mixers with the actual value from the DOM
     if (rocketRef.current.name === 'rocket') {
@@ -109,10 +118,16 @@ export const RocketLaunch = () => {
         nozzle2Action.play()
         yellowFlames1Action.play()
         yellowFlames2Action.play()
+
+        exhaustRef.current.isVisible = true
     }
   }
 
   useFrame((state, delta) => {
+    // FIXME would rather init camera here but wasn't getting that to work
+    state.camera.position.copy(new THREE.Vector3(0.8323590311760216, 3.9264883131924266, 5.999950954690586))
+    state.camera.quaternion.copy(new THREE.Quaternion(-0.10735996505189738, 0.07360926717858128, 0.007970762486023419, 0.991459520421726))
+
     // ***************** FLAMES *****************
     yellowFlamesMaterialRef1.current.uTime += delta
     yellowFlamesMaterialRef2.current.uTime += delta
@@ -126,6 +141,10 @@ export const RocketLaunch = () => {
     nozzle2Mixer?.update(delta)
     yellowFlames1Mixer?.update(delta)
     yellowFlames2Mixer?.update(delta)
+
+    if (rocketRef.current.position.y >= 20) {
+        exhaustRef.current.terminate = true
+    }
     // ******************************************
   })
   
@@ -134,7 +153,9 @@ export const RocketLaunch = () => {
       <primitive object={nodes.ground} material={groundSepia} />
       <primitive object={nodes.rocket_platform} material={platformGray} />
       <primitive object={nodes.rocket_cradle} material={rockGray} ref={cradleRef} />
-      <primitive object={nodes.rocket} material={new THREE.MeshNormalMaterial()} ref={rocketRef} />
+      <primitive object={nodes.rocket} ref={rocketRef}>
+        <meshBasicMaterial map={bodyTexture} />
+      </primitive>
       <primitive object={nodes.rocket_nozzle_1} material={silver} ref={nozzle1Ref} />
       <primitive object={nodes.rocket_nozzle_2} material={silver} ref={nozzle2Ref} />
       <primitive object={nodes.launch_button_platform} material={platformGray} />
@@ -155,7 +176,8 @@ export const RocketLaunch = () => {
                               transparent 
         />
       </primitive>
-      <primitive object={nodes.exhaust_emitter} material={new THREE.MeshNormalMaterial()} />
+      {/* <primitive object={nodes.exhaust_emitter} material={new THREE.MeshNormalMaterial()} ref={emitterRef}/> */}
+      <Exhaust emitter={nodes.exhaust_emitter} exhaustRef={exhaustRef} />
     </group>
   )
 }

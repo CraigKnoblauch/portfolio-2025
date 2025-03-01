@@ -4,17 +4,17 @@ import { useFrame } from '@react-three/fiber'
 import { useTexture } from '@react-three/drei'
 import FifoQueue from 'src/utils/FifoQueue'
 
-export const Exhaust = () => {
+export const Exhaust = ({emitter, exhaustRef}) => {
     
     // If the emitter is not passed, create a new one
-    const emitter = new THREE.Mesh(
-        new THREE.PlaneGeometry(1, 1),
-        new THREE.MeshNormalMaterial()
-    )
-    emitter.rotation.y = Math.PI/2
-    emitter.position.x = -1.5
+    // const emitter = new THREE.Mesh(
+    //     new THREE.PlaneGeometry(1, 1),
+    //     new THREE.MeshNormalMaterial()
+    // )
+    // emitter.rotation.y = Math.PI/2
+    // emitter.position.x = -1.5
 
-    const exhaustRef = useRef({ isVisible: true, terminate: false })
+    // const exhaustRef = useRef({ isVisible: true, terminate: false })
     const groupRef = useRef()
 
     const dishSupportTexture = useTexture('../matcaps/dish-support.png')
@@ -40,7 +40,7 @@ export const Exhaust = () => {
     useFrame((state, delta) => {
 
         // state.camera.position.z += 0.01
-        state.camera.position.z = 25
+        // state.camera.position.z = 25
         
         if ( exhaustRef.current.isVisible ) { // NOTE TODO Using a ref like this is not the best way to handle this. It's a workaround for now.
             const dodecahedron = new THREE.Mesh(
@@ -50,8 +50,11 @@ export const Exhaust = () => {
             dodecahedron.position.copy(emitter.position);
 
             // Get normal for the emitter
-            const normal = new THREE.Vector3();
+            let normal = new THREE.Vector3();
+            // TODO This should work for the rocket launch model I have. I don't know why I can't get that emitter plane to register as the right rotation in the world.
             emitter.getWorldDirection(normal).normalize();
+            // Override for the rocket launch model. FIXME
+            normal = new THREE.Vector3(-0.2, 0, -0.2)
 
             dodecahedron.velocity = new THREE.Vector3(
                 normal.x + (Math.random() - 0.5) * 0.25,
@@ -115,7 +118,7 @@ export const Exhaust = () => {
     })
 
     return <>
-        <primitive object={emitter} />
+        {/* <primitive object={emitter} /> */}
         <group ref={groupRef}>
             {/* Exhaust elements added to this group */}
         </group>

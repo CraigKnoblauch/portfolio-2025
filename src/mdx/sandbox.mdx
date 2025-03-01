@@ -1,4 +1,4 @@
-import { Exhaust } from 'src/components/Exhaust'
+import { ExhaustParticle } from 'src/components/ExhaustParticle'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 
@@ -6,7 +6,7 @@ import { OrbitControls } from '@react-three/drei'
 <Canvas>
     <ambientLight />
     <perspectiveCamera position={[0, 0, 5]} />
-    <OrbitControls />
-    <Exhaust />
+    {/* <OrbitControls /> */}
+    <ExhaustParticle color={'rock-gray'} />
 </Canvas>
 </div>
