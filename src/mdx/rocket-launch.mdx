@@ -51,7 +51,7 @@ export default function RotatingCube() {
 This is the most common approach. But what if you have a bunch of things you want to animate? What if you want to have some mildly complex behaviors like a rocket that accelerates upward? That's gonna require a lot of code. If you're building test cases, that's going to require a bunch of tests. Yes maybe you can tuck it away in isolated components, but what if you want to change it in the future? What if you want to add a slight spin to the rocket or add an entirely new animation? The code balloons, and it becomes harder and harder to change, understand, and maintain. 
 
 ### Blender defined animations
-While I was working on my [custom pathing approach for camera movement](camera-animations), I realized that I could probably define my animations in Blender, export them with the rocket launch gltf file, and play them in the scene. That's exactly what I've done here. I keyframed the positions of the rocket, cradle, and launch button for the beginning and the end of the animation. Blender provides a curve editor, which allows you to play with the animation transitions in a much more intuitive way compared to changing values in code. 
+While I was working on a different project, I realized that I could probably define my animations in Blender, export them with the rocket launch gltf file, and play them in the scene. That's exactly what I've done here. I keyframed the positions of the rocket, cradle, and launch button for the beginning and the end of the animation. Blender provides a curve editor, which allows you to play with the animation transitions in a much more intuitive way compared to changing values in code. 
 
 ![](/pics/blender-rocket-animation-editor.png)
 

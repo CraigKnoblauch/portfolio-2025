@@ -45,4 +45,4 @@ Noticed an edge case where providing the date '2020-01-01' resolved to 'December
 Format looks weird in a few places, content overflows or scales weird
 Code blocks don't have syntax highlighting
 Need a gap at the bottom of the page.
-
+Put final touches on home page and deploy
