@@ -16,10 +16,9 @@ In November 2019, the NG-12 ISS resupply launch carried my team's satellite to s
 </Canvas>
 </div>
 
-# How it works 
 The entire scene is made possible with ThreeJS. The models, animations, and most of the materials were created in Blender. 
 
-## Animations
+# Animations
 Animations in ThreeJS are straightforward. The render loop is accessible with the `useFrame` hook. As long as you associate a ref with the entities in the 3JS scene you want to animate, all you have to do is update the desired property during the render loop. The code below shows you how to use this method to rotate a cube.
 
 ```jsx
@@ -50,7 +49,7 @@ export default function RotatingCube() {
 
 This is the most common approach. But what if you have a bunch of things you want to animate? What if you want to have some mildly complex behaviors like a rocket that accelerates upward? That's gonna require a lot of code. If you're building test cases, that's going to require a bunch of tests. Yes maybe you can tuck it away in isolated components, but what if you want to change it in the future? What if you want to add a slight spin to the rocket or add an entirely new animation? The code balloons, and it becomes harder and harder to change, understand, and maintain. 
 
-### Blender defined animations
+## Blender defined animations
 While I was working on a different project, I realized that I could probably define my animations in Blender, export them with the rocket launch gltf file, and play them in the scene. That's exactly what I've done here. I keyframed the positions of the rocket, cradle, and launch button for the beginning and the end of the animation. Blender provides a curve editor, which allows you to play with the animation transitions in a much more intuitive way compared to changing values in code. 
 
 ![](/pics/blender-rocket-animation-editor.png)
@@ -77,7 +76,7 @@ useFrame((state, delta) => {
 })
 ```
 
-### Procedural exhaust
+## Procedural exhaust
 The exhaust was interesting to implement. Originally, I was thinking of implementing something close to this
 
 ![](/pics/antares-exhaust-ref.png)
@@ -90,29 +89,29 @@ I decided to use dodecahedrons for the base smoke particle. This is a standard m
 
 {/* Dodecehedron examples*/}
 <div class="flex flex-row justify-between h-100 gap-4 items-center">
-    <div class="flex flex-col">
+    <div class="flex flex-col items-center">
+        <img src="/matcaps/rock-gray.png" width={100} height={100}/>
         <Canvas>
             <ambientLight />
             <perspectiveCamera position={[0, 0, 1]} />
             <ExhaustParticle color={"rock-gray"} />
         </Canvas>
-        <img src="/matcaps/rock-gray.png" width={100} height={100}/>
     </div>
-    <div class="flex flex-col">
+    <div class="flex flex-col items-center">
+        <img src="/matcaps/phx-gray.png" width={100} height={100}/>
         <Canvas>
             <ambientLight />
             <perspectiveCamera position={[0, 0, 1]} />
             <ExhaustParticle color={"phx-gray"} />
         </Canvas>
-        <img src="/matcaps/phx-gray.png" width={100} height={100}/>
     </div>
-    <div class="flex flex-col">
+    <div class="flex flex-col items-center">
+        <img src="/matcaps/dish-support.png" width={100} height={100}/>
         <Canvas>
             <ambientLight />
             <perspectiveCamera position={[0, 0, 1]} />
             <ExhaustParticle color={"dish-support"} />
         </Canvas>
-        <img src="/matcaps/dish-support.png" width={100} height={100}/>
     </div>
 </div>
 
@@ -131,7 +130,7 @@ I generated one particle per frame. That quickly becomes a lot of mesh objects. 
 Tucked away in the back of the model is a single plane mesh. When the scene is active, this plane isn't visible. It's purpose is to give us a normal vector to use for a particle's initial velocity vector. With this method, I can create the exhaust animation independent from its implementation in the world. That gives me a lot of flexibility when I'm modifying the rocket launch scene in Blender.  
 
 
-### Flames shader
+## Flames shader
 The flames are a GLSL shader. Shaders are freaking wild! They give you ultimate flexibility over exactly where verticles are drawn, and how the triangles drawn between vertices are colored. The flames shader I created combine a few techniques together.
 
 First, the base mesh was specifically designed in blender to be deformable along the vertical axis. The positions of bottom vertices are driven with perlin noise. At each timestep, a pixel value is extracted from the noise texture, and drives the displacement of the verticles at the bottom of the base mesh. The two flame columns use the same perlin texture, but their pixel columns are different. This is what yields the difference in displacement between the two columns of flame. The base mesh was also unwrapped such that the seam of the UV map does not face the viewer.

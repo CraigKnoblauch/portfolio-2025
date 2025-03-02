@@ -142,7 +142,7 @@ export const RocketLaunch = () => {
     yellowFlames1Mixer?.update(delta)
     yellowFlames2Mixer?.update(delta)
 
-    if (rocketRef.current.position.y >= 20) {
+    if (rocketRef.current.position.y >= 15) {
         exhaustRef.current.terminate = true
     }
     // ******************************************

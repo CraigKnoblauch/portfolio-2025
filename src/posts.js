@@ -2,17 +2,17 @@
 
 export const POSTS = [
     {
-        title: "Releasing a beta",
-        description: "Lessons learned from releasing a bet of my portfolio",
-        date: "2024-06-09",
-        slug: "releasing-a-beta",
+        title: "Rocket Launch",
+        description: "A ThreeJS animation celebrating my cubesat launch in 2019",
+        date: "2025-01-25",
+        slug: "rocket-launch",
         featured: true
     },
     {
-        title: "Rocket Launch",
-        description: "A ThreeJS animation celebrating my cubesat launch in 2019",
-        date: "2024-05-27",
-        slug: "rocket-launch",
+        title: "Releasing a beta",
+        description: "Lessons learned from releasing a beta of my portfolio",
+        date: "2024-06-09",
+        slug: "releasing-a-beta",
         featured: true
     },
     {
