@@ -42,7 +42,11 @@ Noticed an edge case where providing the date '2020-01-01' resolved to 'December
 
 
 # Bugs
-Format looks weird in a few places, content overflows or scales weird
-Code blocks don't have syntax highlighting
-Need a gap at the bottom of the page.
-Put final touches on home page and deploy
+
+- [x] ~Format looks weird in a few places, content overflows or scales weird~
+- [ ] Favicon
+- [ ] Stack and scale matcap exhaust particles when in md or sm or xs screen mode.
+- [ ] Code blocks don't have syntax highlighting
+- [ ] Need a gap and a footer at the bottom of the page.
+- [x] ~Put final touches on home page and deploy~
+- [ ] Condensed professional summary.
