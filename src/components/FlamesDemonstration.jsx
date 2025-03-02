@@ -13,18 +13,18 @@ extend({ YellowFlamesMaterial })
 
 // NOTE I have to use .. instead of . for public location because the route is /explorations not just /
 export const FlamesDemonstration = () => {
-  const { nodes } = useGLTF('../models/rocket-launch.glb')
+  const { nodes } = useGLTF('/models/rocket-launch.glb')
 
   /**
    * Materials
    */
   // Flames perlin texture
-  const perlinTexture = useTexture('../textures/perlin.png')
+  const perlinTexture = useTexture('/textures/perlin.png')
   perlinTexture.wrapS = THREE.RepeatWrapping
   perlinTexture.wrapT = THREE.RepeatWrapping
 
   // Texture to use for flame jumpiness
-  const jumpyPerlinTexture = useTexture('../textures/jumpy-perlin.png')
+  const jumpyPerlinTexture = useTexture('/textures/jumpy-perlin.png')
   jumpyPerlinTexture.wrapS = THREE.RepeatWrapping
   jumpyPerlinTexture.wrapT = THREE.RepeatWrapping
 
@@ -60,4 +60,4 @@ export const FlamesDemonstration = () => {
   )
 }
 
-useGLTF.preload('./models/rocket-launch.glb')
+useGLTF.preload('/models/rocket-launch.glb')

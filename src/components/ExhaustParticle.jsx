@@ -6,7 +6,7 @@ import FifoQueue from 'src/utils/FifoQueue'
 
 export const ExhaustParticle = ({color}) => {
 
-    const texture = useTexture(`../matcaps/${color}.png`)
+    const texture = useTexture(`/matcaps/${color}.png`)
     texture.colorSpace = THREE.SRGBColorSpace
 
     const ref = useRef(new THREE.Object3D())

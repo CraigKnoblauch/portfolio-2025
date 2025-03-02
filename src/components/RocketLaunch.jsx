@@ -14,7 +14,7 @@ extend({ YellowFlamesMaterial })
 
 // NOTE I have to use .. instead of . for public location because the route is /explorations not just /
 export const RocketLaunch = () => {
-  const { nodes, materials, animations } = useGLTF('../models/rocket-launch.glb')
+  const { nodes, materials, animations } = useGLTF('/models/rocket-launch.glb')
 
   /**
    * Materials
@@ -25,35 +25,35 @@ export const RocketLaunch = () => {
   bodyTexture.flipY = false
 
   // **************** MATCAPS ****************
-  const groundMatcapTexture = useLoader(THREE.TextureLoader, '../matcaps/ground.png')
+  const groundMatcapTexture = useLoader(THREE.TextureLoader, '/matcaps/ground.png')
   groundMatcapTexture.colorSpace = THREE.SRGBColorSpace
   const groundSepia = new THREE.MeshMatcapMaterial({matcap: groundMatcapTexture})
 
-  const platformMatcapTexture = useLoader(THREE.TextureLoader, '../matcaps/platform-gray.png')
+  const platformMatcapTexture = useLoader(THREE.TextureLoader, '/matcaps/platform-gray.png')
   platformMatcapTexture.colorSpace = THREE.SRGBColorSpace
   const platformGray = new THREE.MeshMatcapMaterial({matcap: platformMatcapTexture})
 
-  const rockMatcapTexture = useLoader(THREE.TextureLoader, '../matcaps/rock-gray.png')
+  const rockMatcapTexture = useLoader(THREE.TextureLoader, '/matcaps/rock-gray.png')
   rockMatcapTexture.colorSpace = THREE.SRGBColorSpace
   const rockGray = new THREE.MeshMatcapMaterial({matcap: rockMatcapTexture})
 
-  const silverMatcapTexture = useLoader(THREE.TextureLoader, '../matcaps/silver.png')
+  const silverMatcapTexture = useLoader(THREE.TextureLoader, '/matcaps/silver.png')
   silverMatcapTexture.colorSpace = THREE.SRGBColorSpace
   const silver = new THREE.MeshMatcapMaterial({matcap: silverMatcapTexture})
   
-  const vanguardRedMatcapTexture = useLoader(THREE.TextureLoader, '../matcaps/vanguard-red.png')
+  const vanguardRedMatcapTexture = useLoader(THREE.TextureLoader, '/matcaps/vanguard-red.png')
   vanguardRedMatcapTexture.colorSpace = THREE.SRGBColorSpace
   const vanguardRed = new THREE.MeshMatcapMaterial({matcap: vanguardRedMatcapTexture})
   // *****************************************
 
   // ***************** FLAMES *****************
   // Flames perlin texture
-  const perlinTexture = useTexture('../textures/perlin.png')
+  const perlinTexture = useTexture('/textures/perlin.png')
   perlinTexture.wrapS = THREE.RepeatWrapping
   perlinTexture.wrapT = THREE.RepeatWrapping
 
   // Texture to use for flame jumpiness
-  const jumpyPerlinTexture = useTexture('../textures/jumpy-perlin.png')
+  const jumpyPerlinTexture = useTexture('/textures/jumpy-perlin.png')
   jumpyPerlinTexture.wrapS = THREE.RepeatWrapping
   jumpyPerlinTexture.wrapT = THREE.RepeatWrapping
 

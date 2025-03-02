@@ -17,15 +17,15 @@ export const Exhaust = ({emitter, exhaustRef}) => {
     // const exhaustRef = useRef({ isVisible: true, terminate: false })
     const groupRef = useRef()
 
-    const dishSupportTexture = useTexture('../matcaps/dish-support.png')
+    const dishSupportTexture = useTexture('/matcaps/dish-support.png')
     dishSupportTexture.colorSpace = THREE.SRGBColorSpace
     const dishSupportMatcap = new THREE.MeshMatcapMaterial({ matcap: dishSupportTexture })
 
-    const rockGrayTexture = useTexture('../matcaps/rock-gray.png')
+    const rockGrayTexture = useTexture('/matcaps/rock-gray.png')
     rockGrayTexture.colorSpace = THREE.SRGBColorSpace
     const rockGrayMatcap = new THREE.MeshMatcapMaterial({ matcap: rockGrayTexture })
 
-    const phxGrayTexture = useTexture('../matcaps/phx-gray.png')
+    const phxGrayTexture = useTexture('/matcaps/phx-gray.png')
     phxGrayTexture.colorSpace = THREE.SRGBColorSpace
     const phxGrayMatcap = new THREE.MeshMatcapMaterial({ matcap: phxGrayTexture })
 
