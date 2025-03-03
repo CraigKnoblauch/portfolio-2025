@@ -45,7 +45,7 @@ describe('Explorations', () => {
 
         const years = new Set(POSTS.map(post => new Date(post.date).getFullYear()));
         const hRules = document.getElementsByTagName('hr');
-        expect(hRules.length).toBe(years.size);
+        expect(hRules.length-1).toBe(years.size); // NOTE Subtract one to account for the footer
     })
 
     it('should have a link for each post', async () => {

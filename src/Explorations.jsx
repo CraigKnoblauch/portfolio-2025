@@ -1,5 +1,6 @@
 import { PostsToc } from "src/PostsToc.jsx"
 import { Link } from 'react-router-dom'
+import { Footer } from "src/Footer"
 
 const Explorations = ({ posts }) => {
 
@@ -14,6 +15,7 @@ const Explorations = ({ posts }) => {
 
                 <PostsToc posts={posts} />
 
+                <Footer />
             </div>
         </div>
     </>

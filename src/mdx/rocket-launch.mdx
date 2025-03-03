@@ -11,7 +11,6 @@ In November 2019, the NG-12 ISS resupply launch carried my team's satellite to s
 <Canvas>
     <ambientLight />
     <perspectiveCamera position={[-0.2, 3.6, 6.5]} />
-    <OrbitControls />
     <RocketLaunch />
 </Canvas>
 </div>
@@ -19,9 +18,9 @@ In November 2019, the NG-12 ISS resupply launch carried my team's satellite to s
 The entire scene is made possible with ThreeJS. The models, animations, and most of the materials were created in Blender. 
 
 # Animations
-Animations in ThreeJS are straightforward. The render loop is accessible with the `useFrame` hook. As long as you associate a ref with the entities in the 3JS scene you want to animate, all you have to do is update the desired property during the render loop. The code below shows you how to use this method to rotate a cube.
+Animations in ThreeJS are straightforward. The render loop is accessible with the useFrame hook. As long as you associate a ref with the entities in the 3JS scene you want to animate, all you have to do is update the desired property during the render loop. The code below shows you how to use this method to rotate a cube.
 
-```jsx
+```js
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 
@@ -88,6 +87,7 @@ I decided to play around with a collection of meshes to create a cartoon smoke e
 I decided to use dodecahedrons for the base smoke particle. This is a standard mesh type in ThreeJS, which makes it very easy to instantiate them in my scene. I took three of the gray matcaps I have from the rest of my [portfolio project](lessons-from-a-3d-portfolio.mdx) and applied them to the dodecahedrons. 
 
 {/* Dodecehedron examples*/}
+{/* Formatting not quite working TODO
 <div class="flex flex-row justify-between h-100 gap-4 items-center">
     <div class="flex flex-col items-center">
         <img src="/matcaps/rock-gray.png" width={100} height={100}/>
@@ -114,6 +114,7 @@ I decided to use dodecahedrons for the base smoke particle. This is a standard m
         </Canvas>
     </div>
 </div>
+*/}
 
 To make this collection appear as exhaust, each particle would have to follow a path similar to:
 

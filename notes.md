@@ -44,9 +44,12 @@ Noticed an edge case where providing the date '2020-01-01' resolved to 'December
 # Bugs
 
 - [x] ~Format looks weird in a few places, content overflows or scales weird~
-- [ ] Favicon
-- [ ] Stack and scale matcap exhaust particles when in md or sm or xs screen mode.
-- [ ] Code blocks don't have syntax highlighting
-- [ ] Need a gap and a footer at the bottom of the page.
+- [x] Favicon
+- [x] Stack and scale matcap exhaust particles when in md or sm or xs screen mode.
+- [x] Code blocks don't have syntax highlighting
+- [x] Need a gap and a footer at the bottom of the page.
 - [x] ~Put final touches on home page and deploy~
-- [ ] Condensed professional summary.
+- [x] Condensed professional summary.
+- [x] Button for launch instead of model because mobile can't swipe over image. Took away orbit controls and this went away
+- [x] comment out sandbox
+- [x] TOC scales weird on very small screens

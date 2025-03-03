@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import { Footer } from 'src/Footer.jsx'
+import { OutboundArrow } from 'src/OutboundArrow.jsx'
 
 const Home = ({ posts }) => {
 
@@ -32,13 +34,11 @@ const Home = ({ posts }) => {
                 <div className="flex flex-col space-y-2 merriweather-regular text-sm py-4">
 					{/* Title */}
 					<div className="text-secondary-gray">Professional Experience</div>
-					<p className="text-primary-white">I am a seasoned software engineer with several years of experience spanning defense research, financial technology, and aerospace. I specialize in sophisticated applications that automate complex processes and significantly improve efficiency. My technical versatility is demonstrated through my work with various programming languages and application stacks, complemented by my ability to independently architect solutions while effectively communicating with stakeholders and coordinating cross-disciplinary teams.</p>
+					<p className="text-primary-white">I am a seasoned software engineer with several years of experience spanning defense, fintech, and aerospace. I'm proud to be developing space technology at the U.S. Naval Research Laboratory. My passion and ability to deliver robust software solutions is complemented by my exceptional communication and leadership of cross-disciplinary teams.</p>
 					{/* Small flexbox to hold outbound arrow and link */}
 					<div className="flex flex-row text-primary-white">
 						<a href="https://drive.google.com/file/d/1q3qX4lHtOwgXbwCQicCOyJ9uc8KG6TYD/view?usp=drivesdk" className="underline">resume</a>
-						<svg height="20px" width="20px">
-							<path d="M7 17L17 7M17 7H8M17 7V16" stroke="#a3a3a3" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
-						</svg>
+                        <OutboundArrow height={"20px"} width={"20px"} />
 					</div>
 				</div>
                 {/* Contact section. Use pattern here to make a component later on */}
@@ -46,12 +46,20 @@ const Home = ({ posts }) => {
 					{/* Title */}
 					<div className="text-secondary-gray">Connect</div>
 					<div className="flex flex-row space-x-10 text-secondary-gray">
-						<a href="https://www.linkedin.com/in/craig-knoblauch-b88563124">LinkedIn</a>
-						<a href="https://github.com/CraigKnoblauch">Github</a>
-						<a href="mailto:todo@example.com">Mail</a>
+						<div className='flex flex-row px-1'>
+                            <a className="underline" href="https://www.linkedin.com/in/craig-knoblauch-b88563124">LinkedIn</a>
+                            <OutboundArrow height={"20px"} width={"20px"} />
+                        </div>
+                        <div className='flex flex-row px-1'>
+                            <a className="underline" href="https://github.com/CraigKnoblauch">Github</a>
+                            <OutboundArrow height={"20px"} width={"20px"} />
+                        </div>
+						<a className="underline" href="mailto:todo@example.com">Mail</a>
 					</div>
 				</div>
-            </div>
+
+                <Footer />
+            </div> 
         </div>
     </>
   )

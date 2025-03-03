@@ -15,11 +15,11 @@ export const POSTS = [
         slug: "releasing-a-beta",
         featured: true
     },
-    {
-        title: "Sandbox",
-        description: "Sandbox",
-        date: "2020-01-01",
-        slug: "sandbox",
-        featured: false
-    }
+    // {
+    //     title: "Sandbox",
+    //     description: "Sandbox",
+    //     date: "2020-01-01",
+    //     slug: "sandbox",
+    //     featured: false
+    // }
 ]
