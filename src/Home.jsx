@@ -54,7 +54,7 @@ const Home = ({ posts }) => {
                             <a className="underline" href="https://github.com/CraigKnoblauch">Github</a>
                             <OutboundArrow height={"20px"} width={"20px"} />
                         </div>
-						<a className="underline" href="mailto:todo@example.com">Mail</a>
+						<a className="underline" href="mailto:ck@craigk.me">Mail</a>
 					</div>
 				</div>
 
